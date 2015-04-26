@@ -1,0 +1,38 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEE"
+    tools:context="com.example.sehal.cooking.NavigationDrawerFragment">
+
+    <RelativeLayout
+        android:id="@+id/cover"
+        android:layout_width="match_parent"
+        android:layout_height="220dp">
+
+        <ImageView
+            android:id="@+id/coverpic"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:paddingBottom="16dp"
+            android:background="#DD55" />
+
+        <com.example.sehal.cookbook.CircleDP
+            android:id="@+id/displaypicture"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="15dp"
+            android:elevation="5dp"
+            />
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/navigationList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/cover"
+        android:background="#EEE" />
+
+</RelativeLayout>
