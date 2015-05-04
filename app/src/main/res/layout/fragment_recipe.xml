@@ -1,18 +1,51 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.sehal.cookbook.Recipe">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/texts"
+    <LinearLayout
+        android:id="@+id/recipenamelayout"
         android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#3f000000"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/recipename"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="RECIPE NAME" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_below="@+id/recipenamelayout"
+        android:background="#5f000000"
+        android:orientation="horizontal">
+
+        <RatingBar
+            style="@android:style/Widget.Holo.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:isIndicator="true" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/indrecipe"
+        android:layout_width="match_parent"
+
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:textColor="#FFF"
-        android:text="@string/hello_blank_fragment"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_below="@+id/linear"
+        android:layout_weight="1"
+        android:background="#EEE" />
 
 
-</FrameLayout>
+
+
+</RelativeLayout>

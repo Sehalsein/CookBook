@@ -11,7 +11,19 @@ import android.transition.Transition;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.bartoszlipinski.recyclerviewheader.RecyclerViewHeader;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +34,19 @@ import java.util.List;
  */
 public class RecipeList extends Fragment implements RAdapter.Clicklistener {
 
-
+    //public static final String URL_BIG_OVEN = "http://api.bigoven.com/recipes?title_kw=oysters&pg=1";
+    public static final String URL_BIG_OVEN = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json";
     Communicator comm;
+    RatingBar ratings;
+    private ImageLoader imageLoader;
+    private VolleySingleton volleySingleton;
+    private RequestQueue requestQueue;
+
+
+    public static String getRequestUrl(int limit) {
+        //return URL_BIG_OVEN + "&rpp=" + limit + "&apikey=" + MyApplication.API_KEY;
+        return URL_BIG_OVEN +"?apikey="+MyApplication.API_KEY+"&limit="+limit;
+    }
 
     public RecipeList() {
 
@@ -31,21 +54,61 @@ public class RecipeList extends Fragment implements RAdapter.Clicklistener {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        volleySingleton = VolleySingleton.getInstance();
+        requestQueue = volleySingleton.getRequestQueue();
+
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, getRequestUrl(10), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                L.t(getActivity(), response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "ERROR" + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        requestQueue.add(request);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.home_page, container, false);
+        View layout = inflater.inflate(R.layout.recipe_list, container, false);
 
-        RecyclerView recnav = (RecyclerView) layout.findViewById(R.id.cardList);
+        ratings = (RatingBar) layout.findViewById(R.id.ratings);
+
+        //ratings.setRating(50);
+
+        RecyclerView recnav = (RecyclerView) layout.findViewById(R.id.recipeList);
+        // RecyclerViewHeader header = RecyclerViewHeader.fromXml(getActivity(), R.layout.card_layout);
         recnav.setHasFixedSize(true);
         GridLayoutManager llm = new GridLayoutManager(getActivity(), 2);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recnav.setLayoutManager(llm);
-        RAdapter nav = new RAdapter(getActivity(), createList(3));
-        nav.setClicklistener(this);     //used for on click
-        recnav.setAdapter(nav);
 
+
+        // header.attachTo(recnav);
+        RLAapter nav = new RLAapter(getActivity(), createList(4));
+        //nav.setClicklistener(this);     //used for on click
+        recnav.setAdapter(nav);
+    /*    RequestQueue requestQueue= VolleySingleton.getInstance().getRequestQueue();
+        StringRequest request=new StringRequest(Request.Method.GET, "http://php.net/", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getActivity(), "RESPONSE" + response, Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "ERROR" + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        requestQueue.add(request);*/
         return layout;
     }
 
@@ -61,7 +124,7 @@ public class RecipeList extends Fragment implements RAdapter.Clicklistener {
                     "http://s12.postimg.org/eovd3crsd/breakfastmain.png"};
 
             //TODO SAVE IT IN AN ARRAY IN STRING XML (UPDATE) :P
-            String homemenu[] = {"APPETIZER",
+            String homemenu[] = {"WAA",
                     "MAIN COURSE",
                     "MEAT AND SEAFOOD",
                     "BAKED GOODS",
@@ -88,7 +151,6 @@ public class RecipeList extends Fragment implements RAdapter.Clicklistener {
         super.onActivityCreated(savedInstanceState);
 
     }
-
 
 
     //ITEM CLICK THIS IS PASSED TO MAIN ACTIVITY

@@ -58,8 +58,15 @@ public class IndRecipe extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            Recipe recipe = Recipe.getInstance(position);
-            return recipe;
+            Fragment fragment=null;
+            switch (position){
+                case 1: fragment=Ingredients.newInstance("","");
+                    break;
+                case 0: fragment = Recipe.getInstance(position);
+                    break;
+            }
+
+            return fragment;
         }
 
 
