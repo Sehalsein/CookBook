@@ -17,9 +17,13 @@ import com.example.sehal.cookbook.tabs.SlidingTabLayout;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * THIS class is used to display the individual recipe and its recipe
+ * this is the backend of the page this class is used to setup up the tabs and the pager
+ * any the fragments are accessed dusing this class
  */
 public class IndRecipe extends Fragment {
+
+    //INITIALIING
     ViewPager mPager;
     SlidingTabLayout mTabs;
 
@@ -32,23 +36,29 @@ public class IndRecipe extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View layout = inflater.inflate(R.layout.ind_recipe, container, false);
 
         //INTIIALIZING PAGER AND TABS
-
         mPager = (ViewPager) layout.findViewById(R.id.pager);
-        mPager.setAdapter(new MyPagerAdapter(getFragmentManager()));
-
+        mPager.setAdapter(new MyPagerAdapter(getChildFragmentManager()));
         mTabs = (SlidingTabLayout) layout.findViewById(R.id.tabs);
         mTabs.setDistributeEvenly(true);
-       // mTabs.setCustomTabColorizer(#ffff);
+        // mTabs.setCustomTabColorizer(#ffff);
         mTabs.setViewPager(mPager);
+
+
         return layout;
     }
 
+
+    //THIS CLASS iS USED AS AN ADAPTER TO SWTITCH BETWEEN TWO FRAGMENTS IN VIEW PAGER
     class MyPagerAdapter extends FragmentPagerAdapter {
 
+        /**
+         * THIS IS THE VALUE OF THE TABS IE WHAT IT SHIULD DISPLAY
+         * ITS ALREADT DECLARED IN THE STRING XML FILE
+         * ANY CHANGES MUST BE DONE FROM THERE
+         */
         String[] tabs;
 
         public MyPagerAdapter(FragmentManager fm) {
@@ -56,13 +66,16 @@ public class IndRecipe extends Fragment {
             tabs = getResources().getStringArray(R.array.tabs);
         }
 
+        //ASSIGNING WHICH FRAGMENT MUST DISPLAY IN EACH TAB
         @Override
         public Fragment getItem(int position) {
-            Fragment fragment=null;
-            switch (position){
-                case 1: fragment=Ingredients.newInstance("","");
+            Fragment fragment = null;
+            switch (position) {
+                case 1:
+                    fragment = Ingredients.newInstance("", "");
                     break;
-                case 0: fragment = Recipe.getInstance(position);
+                case 0:
+                    fragment = Recipe.getInstance(position);
                     break;
             }
 
@@ -75,6 +88,7 @@ public class IndRecipe extends Fragment {
             return tabs[position];
         }
 
+        //NO OF TABS REQUIRED ITS CHANGEABLE
         @Override
         public int getCount() {
             return 2;

@@ -23,10 +23,15 @@ import java.util.List;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * THIS class is the code FOR navigation_drawer.xml
+ * this class intitalizes a recycler view recnav  //TODO CHANGE THE VARIABLE NAME
+ * cardList is assigned to recnav   //this is the name of the recycler thing in the xml file :P
+ * Vertical Orientation  //TODO CHANGE THE VARIABLE NAME
+ * ADAPTER OF THIS recycler view is RAdapter and the variable is nav //TODO CHANGE THE VARIABLE NAME
  */
 public class NavigationDrawer extends Fragment implements NAdapter.ClicklistenerNav {
 
+    //Declaring variables
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     Communicator comm;
@@ -40,10 +45,10 @@ public class NavigationDrawer extends Fragment implements NAdapter.Clicklistener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View layout = inflater.inflate(R.layout.navigation_drawer, container, false);
 
-        ImageView DisplayPicture = (ImageView) layout.findViewById(R.id.displaypicture);
+
+        //RECYCLER VIEW SETUP (NAVIGATION DRWAER) //TODO CHANGE THE VARIABLE NAME LATER
         RecyclerView recnav = (RecyclerView) layout.findViewById(R.id.navigationList);
         recnav.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
@@ -52,27 +57,32 @@ public class NavigationDrawer extends Fragment implements NAdapter.Clicklistener
         NAdapter nav = new NAdapter(getActivity(), createList(7));
         recnav.setAdapter(nav);
         nav.setClicklistener(this);
-        Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.dp);
 
+        //PROFILE PICTURE IN NAVIGATION DRAWER //TODO TRY TO GET A SMALLER CODE
+        ImageView DisplayPicture = (ImageView) layout.findViewById(R.id.displaypicture);
+        Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.dp);
         DisplayPicture.setImageBitmap(icon);
 
         return layout;
     }
 
+    //PASSING DATA INTO THE RECYLCER VIEW //TODO CHANGE THE VARIABLE NAME LATER
     private List<NavigationInfo> createList(int size) {
         List<NavigationInfo> result = null;
         try {
+            //TODO INSERT THE ARRAY DIRECTLY TO STRING XML FILE
             int icons[] = {R.drawable.home,
                     R.drawable.search,
                     R.drawable.favourite,
                     R.drawable.settings,
-                    R.drawable.info};
+            };
 
+            //TODO INSERT THE ARRAY DIRECTLY TO STRING XML FILE
             String navmenu[] = {"Main Menu",
                     "Search",
                     "Favourite",
                     "Settings",
-                    "Information"};
+            };
 
             result = new ArrayList<NavigationInfo>();
             for (int i = 0; i <= size; i++) {
@@ -87,6 +97,7 @@ public class NavigationDrawer extends Fragment implements NAdapter.Clicklistener
         return result;
     }
 
+    //seting the navigation drawer to work
     public void setup(DrawerLayout drawerlayout, final Toolbar toolbar) {
         mDrawerLayout = drawerlayout;
 
@@ -100,7 +111,8 @@ public class NavigationDrawer extends Fragment implements NAdapter.Clicklistener
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
             }
-/*
+
+            /*
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
 
@@ -109,6 +121,7 @@ public class NavigationDrawer extends Fragment implements NAdapter.Clicklistener
                 }
                 Log.d("SEHAL", "OFFSET" + slideOffset);
             }*/
+
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerLayout.post(new Runnable() {
@@ -119,6 +132,7 @@ public class NavigationDrawer extends Fragment implements NAdapter.Clicklistener
         });
     }
 
+    //INITIALIZING THE Communication InterFACE (I think):P
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         comm = (Communicator) getActivity();
@@ -128,33 +142,27 @@ public class NavigationDrawer extends Fragment implements NAdapter.Clicklistener
 
 
     //ITEM CLICK THIS IS PASSED TO MAIN ACTIVITY
-
-
     @Override
     public void itemClickednav(View view, int position) {
-       // Log.d("SEHAL","SAD");
-       // Toast.makeText(getActivity(), "Hey u just hit" + position, Toast.LENGTH_SHORT).show();
-
-        comm.respond(position,"NAVIGATION DRAWER");
-
-        switch (position){
-            case 1: mDrawerLayout.closeDrawers();
-                Toast.makeText(getActivity(), "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
-                break;
-            case 2: mDrawerLayout.closeDrawers();
-                Toast.makeText(getActivity(), "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
-                break;
-            case 3: mDrawerLayout.closeDrawers();
-                Toast.makeText(getActivity(), "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
-                break;
-            case 4: mDrawerLayout.closeDrawers();
-                Toast.makeText(getActivity(), "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
-                break;
-            case 0: startActivity(new Intent(getActivity(), MainActivity.class));
+        switch (position) {
+            case 1:
                 mDrawerLayout.closeDrawers();
                 Toast.makeText(getActivity(), "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
                 break;
-
+            case 2:
+                mDrawerLayout.closeDrawers();
+                Toast.makeText(getActivity(), "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
+                break;
+            case 3:
+                mDrawerLayout.closeDrawers();
+                startActivity(new Intent(getActivity(), Settings.class));
+                Toast.makeText(getActivity(), "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
+                break;
+            case 0:
+                startActivity(new Intent(getActivity(), MainActivity.class));
+                mDrawerLayout.closeDrawers();
+                Toast.makeText(getActivity(), "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 }

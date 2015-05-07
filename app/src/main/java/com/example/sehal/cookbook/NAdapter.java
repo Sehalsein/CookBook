@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
-
+/**
+ * THIS class is the ADAPTER FOR RECYCLEWR VIEW for NavigationDrawerr.class
+ * //TODO CHANGE THE VIEWHODER NAME
+ */
 public class NAdapter extends RecyclerView.Adapter<NAdapter.NavigationViewHolder> {
 
     private List<NavigationInfo> navigationList;
@@ -19,8 +22,8 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NavigationViewHolder
     private ClicklistenerNav clicklistenernav;
 
 
-    public NAdapter(Context context,List<NavigationInfo> navigationList) {
-        this.context=context;
+    public NAdapter(Context context, List<NavigationInfo> navigationList) {
+        this.context = context;
         this.navigationList = navigationList;
 
     }
@@ -32,33 +35,32 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NavigationViewHolder
     }
 
     @Override
-    public void onBindViewHolder( NavigationViewHolder navigationViewHolder, int position) {
+    public void onBindViewHolder(NavigationViewHolder navigationViewHolder, int position) {
 
         NavigationInfo ci = navigationList.get(position);
-
-      /*  Picasso.with(context)
-                .load(ci.Icon)
-                .into(navigationViewHolder.vicon);*/
 
         navigationViewHolder.vicon.setImageResource(ci.Icon);
         navigationViewHolder.vText.setText(ci.Text);
 
     }
 
+    //GETTING THE LAYoUT FOR INDIVIADUAL ROWS
     @Override
     public NavigationViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
                 inflate(R.layout.navigation_view, viewGroup, false);
 
-        return new  NavigationViewHolder(itemView);
+        return new NavigationViewHolder(itemView);
     }
 
+    //SETTING ON CLICK FOR EACH ROW
     public void setClicklistener(ClicklistenerNav clicklistenernav) {
         this.clicklistenernav = clicklistenernav;
     }
 
-    public class NavigationViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
+    //DECLARING AND INTIALIZING VARIABLE //TODO CHANGE THE NAME OF VARIABLE
+    public class NavigationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         protected TextView vText;
         ImageView vicon;
@@ -66,20 +68,21 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NavigationViewHolder
         public NavigationViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            vText = (TextView)  v.findViewById(R.id.nav_text_name);
-            vicon = (ImageView)v.findViewById(R.id.ImageView);
+            vText = (TextView) v.findViewById(R.id.nav_text_name);
+            vicon = (ImageView) v.findViewById(R.id.ImageView);
         }
 
         @Override
         public void onClick(View v) {
             //context.startActivity(new Intent(context, SubActivity.class));
             if (clicklistenernav != null) {
-                Log.d("SEHAL","SADd");
+                Log.d("SEHAL", "SADd");
                 clicklistenernav.itemClickednav(v, getPosition());
             }
         }
     }
 
+    //PASSES THE VALUE TO THE MAIN ACTIVITY
     public interface ClicklistenerNav {
 
         public void itemClickednav(View view, int position);

@@ -16,7 +16,13 @@ import java.util.List;
 
 /**
  * Created by sehal on 4/28/2015.
+ *
+ * THIS class is the ADAPTER FOR RECYCLEWR VIEW for Recipe.class
+ *   //TODO CHANGE THE VIEWHODER NAME
+ *
+ *
  */
+
 public class IRAdapter extends RecyclerView.Adapter<IRAdapter.CookingViewHolder> {
 
     private List<IndRecipeInfo> cookList;
@@ -43,6 +49,7 @@ public class IRAdapter extends RecyclerView.Adapter<IRAdapter.CookingViewHolder>
         return cookList.size();
     }
 
+    //ASSIGNING VALUES PASSED FROM THE CLASS
     @Override
     public void onBindViewHolder(final CookingViewHolder cookingViewHolder, int viewType) {
 
@@ -57,13 +64,14 @@ public class IRAdapter extends RecyclerView.Adapter<IRAdapter.CookingViewHolder>
         cookingViewHolder.vDishName.setText(ci.recipestepno);
         cookingViewHolder.vRecipeStep.setText(ci.recipestep);
         //rating=5%rating;
-//        cookingViewHolder.ratings.setRating((float) 3.5);
+        //cookingViewHolder.ratings.setRating((float) 3.5);
         //Set the font here
         cookingViewHolder.vDishName.setTypeface(roboto_reg);
 
 
     }
 
+    //GETTING THE LAYoUT FOR INDIVIADUAL ROWS //TODO CHECK IF CORRECT
     @Override
     public CookingViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
         View itemView = LayoutInflater.
@@ -73,10 +81,14 @@ public class IRAdapter extends RecyclerView.Adapter<IRAdapter.CookingViewHolder>
         return new CookingViewHolder(itemView);
     }
 
+
+    //SETTING ON CLICK FOR EACH ROW //TODO FIX IT
     public void setClicklistener(Clicklistener clicklistener) {
         this.clicklistener = clicklistener;
     }
 
+
+    //DECLARING AND INTIALIZING VARIABLE //TODO CHANGE THE NAME OF VARIABLE
     public class CookingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         protected TextView vDishName;
@@ -103,6 +115,7 @@ public class IRAdapter extends RecyclerView.Adapter<IRAdapter.CookingViewHolder>
         }
     }
 
+    //PASSES THE VALUE TO THE MAIN ACTIVITY
     public interface Clicklistener {
         public void itemClicked(View view, int position);
     }

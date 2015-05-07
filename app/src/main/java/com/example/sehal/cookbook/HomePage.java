@@ -12,17 +12,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * THIS class is the code FOR home_page.xml
+ * this class intitalizes a recycler view recnav  //TODO CHANGE THE VARIABLE NAME
+ * cardList is assigned to recnav   //this is the name of the recycler thing in the xml file :P
+ * Vertical Orientation  //TODO CHANGE THE VARIABLE NAME
+ * ADAPTER OF THIS recycler view is RAdapter and the variable is nav //TODO CHANGE THE VARIABLE NAME
+ *
  */
 
 public class HomePage extends Fragment implements RAdapter.Clicklistener {
 
-    Communicator comm;
+    Communicator comm; //Declaring the Communication interface variable used to communicating between different fragment
 
     public HomePage() {
         // Required empty public constructor
@@ -35,6 +39,8 @@ public class HomePage extends Fragment implements RAdapter.Clicklistener {
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.home_page, container, false);
 
+
+        //RECYCLER VIEW SETUP (HOME PAGE) //TODO CHANGE THE VARIABLE NAME LATER
         RecyclerView recnav = (RecyclerView) layout.findViewById(R.id.cardList);
         recnav.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
@@ -47,10 +53,11 @@ public class HomePage extends Fragment implements RAdapter.Clicklistener {
         return layout;
     }
 
-    //PASS DATA INTO THE RECYLCER VIEW
+    //PASSING DATA INTO THE RECYLCER VIEW //TODO CHANGE THE VARIABLE NAME LATER
     private List<HomeInfo> createList(int size) {
         List<HomeInfo> result = null;
         try {
+            //TODO INSERT THE ARRAY DIRECTLY TO STRING XML FILE
             String icons[] = {"http://s28.postimg.org/hh6fjx3rx/appetizermain.png",
                     "http://s18.postimg.org/x6hah93mx/maincourse.png",
                     "http://s24.postimg.org/6b3m8o0p1/meatmain.png",
@@ -58,6 +65,7 @@ public class HomePage extends Fragment implements RAdapter.Clicklistener {
                     "http://s14.postimg.org/aza926y1d/saladmain.png",
                     "http://s12.postimg.org/eovd3crsd/breakfastmain.png"};
 
+            //TODO INSERT THE ARRAY DIRECTLY TO STRING XML FILE
             String homemenu[] = {"APPETIZER",
                     "MAIN COURSE",
                     "MEAT AND SEAFOOD",
@@ -79,6 +87,7 @@ public class HomePage extends Fragment implements RAdapter.Clicklistener {
     }
 
 
+    //INITIALIZING THE Communication InterFACE (I think):P
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         comm = (Communicator) getActivity();
@@ -90,7 +99,7 @@ public class HomePage extends Fragment implements RAdapter.Clicklistener {
     //ITEM CLICK THIS IS PASSED TO MAIN ACTIVITY
     @Override
     public void itemClicked(View view, int position) {
-        comm.respond(position,"HOME PAGE");
+        comm.respond(position, "HOME PAGE");
         //Toast.makeText(getActivity(), "Hey u just hit" + position, Toast.LENGTH_SHORT).show();
     }
 }

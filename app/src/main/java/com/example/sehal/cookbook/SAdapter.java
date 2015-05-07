@@ -14,24 +14,22 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import javax.security.auth.callback.Callback;
-
 /**
  * Created by sehal on 4/28/2015.
  *
- * THIS class is the ADAPTER FOR RECYCLEWR VIEW for HomePage
+ * THIS class is the ADAPTER FOR RECYCLEWR VIEW for SettingHome
  *   //TODO CHANGE THE VIEWHODER NAME
  *
  *
  */
-public class RAdapter extends RecyclerView.Adapter<RAdapter.CookingViewHolder> {
+public class SAdapter extends RecyclerView.Adapter<SAdapter.CookingViewHolder> {
 
-    private List<HomeInfo> cookList;
+    private List<SettingsInfo> cookList;
     Context context;
     private Clicklistener clicklistener;
     private Typeface roboto_reg, roboto_bold, roboto_thin;
 
-    public RAdapter(Context con, List<HomeInfo> cookList) {
+    public SAdapter(Context con, List<SettingsInfo> cookList) {
         this.context = con;
         this.cookList = cookList;
 
@@ -48,50 +46,25 @@ public class RAdapter extends RecyclerView.Adapter<RAdapter.CookingViewHolder> {
         return cookList.size();
     }
 
-
-    //ASSIGNING VALUES PASSED FROM THE CLASS
     @Override
     public void onBindViewHolder(final CookingViewHolder cookingViewHolder, int viewType) {
 
-
-        HomeInfo ci = cookList.get(viewType);
-
-        cookingViewHolder.loading.setVisibility(View.VISIBLE);
-        Picasso.with(context)
-                .load(ci.iconid)
-                .error(R.drawable.error)
-                .into(cookingViewHolder.vicon, new com.squareup.picasso.Callback() {
-                    @Override
-                    public void onSuccess() {
-                        cookingViewHolder.loading.setVisibility(View.GONE);
-                    }
-
-                    @Override
-                    public void onError() {
-                        cookingViewHolder.loading.setVisibility(View.GONE);
-                        //NOTHING
-                    }
-                });
-
-        Picasso.with(context).setIndicatorsEnabled(true);
-        cookingViewHolder.vDishName.setText(ci.dishname);
+        SettingsInfo ci = cookList.get(viewType);
+        cookingViewHolder.msettingsLabel.setText(ci.settingsLabel);
         //Set the font here
-        cookingViewHolder.vDishName.setTypeface(roboto_reg);
-
+        cookingViewHolder.msettingsLabel.setTypeface(roboto_reg);
 
     }
-
 
     //GETTING THE LAYoUT FOR INDIVIADUAL ROWS //TODO CHECK IF CORRECT
     @Override
     public CookingViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
-                inflate(R.layout.card_layout, viewGroup, false);
+                inflate(R.layout.settings_list, viewGroup, false);
 
         return new CookingViewHolder(itemView);
     }
-
 
     //SETTING ON CLICK FOR EACH ROW
     public void setClicklistener(Clicklistener clicklistener) {
@@ -102,17 +75,13 @@ public class RAdapter extends RecyclerView.Adapter<RAdapter.CookingViewHolder> {
     //DECLARING AND INTIALIZING VARIABLE //TODO CHANGE THE NAME OF VARIABLE
     public class CookingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        protected TextView vDishName;
-        ImageView vicon;
-         ProgressBar loading;
-
+        protected TextView msettingsLabel;
 
         public CookingViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            vDishName = (TextView) v.findViewById(R.id.dish_name);
-            vicon = (ImageView) v.findViewById(R.id.imageView);
-            loading= (ProgressBar) v.findViewById(R.id.progress);
+            msettingsLabel = (TextView) v.findViewById(R.id.settings_label);
+
         }
 
         @Override

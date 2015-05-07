@@ -30,10 +30,16 @@ import java.util.List;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * THIS class is the code FOR recipe_list.xml
+ * this class intitalizes a recycler view recnav  //TODO CHANGE THE VARIABLE NAME
+ * cardList is assigned to recnav   //this is the name of the recycler thing in the xml file :P
+ * Vertical Orientation  //TODO CHANGE THE VARIABLE NAME
+ * ADAPTER OF THIS recycler view is RAdapter and the variable is nav //TODO CHANGE THE VARIABLE NAME
+ *
  */
 public class RecipeList extends Fragment implements RAdapter.Clicklistener {
 
+    //Declaring variables
     //public static final String URL_BIG_OVEN = "http://api.bigoven.com/recipes?title_kw=oysters&pg=1";
     public static final String URL_BIG_OVEN = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json";
     Communicator comm;
@@ -43,9 +49,10 @@ public class RecipeList extends Fragment implements RAdapter.Clicklistener {
     private RequestQueue requestQueue;
 
 
+    //DECALRING THE URL FOR THE API IN ONE STRING
     public static String getRequestUrl(int limit) {
-        //return URL_BIG_OVEN + "&rpp=" + limit + "&apikey=" + MyApplication.API_KEY;
-        return URL_BIG_OVEN +"?apikey="+MyApplication.API_KEY+"&limit="+limit;
+        //return URL_BIG_OVEN + "&rpp=" + limit + "&apikey=" + MyApplication.API_KEY;   //BIGOVEn URL
+        return URL_BIG_OVEN +"?apikey="+MyApplication.API_KEY+"&limit="+limit;          //ROTTEN TOMATOES
     }
 
     public RecipeList() {
@@ -60,7 +67,7 @@ public class RecipeList extends Fragment implements RAdapter.Clicklistener {
         volleySingleton = VolleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
 
-
+        //DRCLARING A JSONOBJECT FOR API
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, getRequestUrl(10), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -78,44 +85,30 @@ public class RecipeList extends Fragment implements RAdapter.Clicklistener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.recipe_list, container, false);
 
         ratings = (RatingBar) layout.findViewById(R.id.ratings);
 
-        //ratings.setRating(50);
 
+        //RECYCLER VIEW SETUP (RECIPE LIST) //TODO CHANGE THE VARIABLE NAME LATER
         RecyclerView recnav = (RecyclerView) layout.findViewById(R.id.recipeList);
-        // RecyclerViewHeader header = RecyclerViewHeader.fromXml(getActivity(), R.layout.card_layout);
         recnav.setHasFixedSize(true);
         GridLayoutManager llm = new GridLayoutManager(getActivity(), 2);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recnav.setLayoutManager(llm);
-
-
-        // header.attachTo(recnav);
         RLAapter nav = new RLAapter(getActivity(), createList(4));
         //nav.setClicklistener(this);     //used for on click
         recnav.setAdapter(nav);
-    /*    RequestQueue requestQueue= VolleySingleton.getInstance().getRequestQueue();
-        StringRequest request=new StringRequest(Request.Method.GET, "http://php.net/", new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(getActivity(), "RESPONSE" + response, Toast.LENGTH_SHORT).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "ERROR" + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        requestQueue.add(request);*/
+
         return layout;
     }
 
-    //PASS DATA INTO THE RECYLCER VIEW
+    //PASSING DATA INTO THE RECYLCER VIEW //TODO CHANGE THE VARIABLE NAME LATER
     private List<HomeInfo> createList(int size) {
         List<HomeInfo> result = null;
         try {
+            //TODO SAVE IT IN AN ARRAY IN STRING XML (UPDATE) :P
             String icons[] = {"http://s28.postimg.org/hh6fjx3rx/appetizermain.png",
                     "http://s18.postimg.org/x6hah93mx/maincourse.png",
                     "http://s24.postimg.org/6b3m8o0p1/meatmain.png",
@@ -144,7 +137,7 @@ public class RecipeList extends Fragment implements RAdapter.Clicklistener {
         return result;
     }
 
-
+    //INITIALIZING THE Communication InterFACE (I think):P
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         comm = (Communicator) getActivity();

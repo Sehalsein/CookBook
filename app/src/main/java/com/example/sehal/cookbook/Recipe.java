@@ -30,10 +30,17 @@ import java.util.List;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * THIS class is the code FOR fragment_recipe.xml
+ * this class intitalizes a recycler view recnav  //TODO CHANGE THE VARIABLE NAME
+ * cardList is assigned to recnav   //this is the name of the recycler thing in the xml file :P
+ * Vertical Orientation  //TODO CHANGE THE VARIABLE NAME
+ * ADAPTER OF THIS recycler view is RAdapter and the variable is nav //TODO CHANGE THE VARIABLE NAME
+ *
  */
 public class Recipe extends Fragment {
 
+
+    //Declaring variables
     TextView textView;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
@@ -57,10 +64,11 @@ public class Recipe extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_recipe, container, false);
-       // textView = (TextView) layout.findViewById(R.id.texts);
+
+
+        //RECYCLER VIEW SETUP ( IND RECIPE) //TODO CHANGE THE VARIABLE NAME LATER
         RecyclerView recnav = (RecyclerView) layout.findViewById(R.id.indrecipe);
-        RecyclerViewHeader header = RecyclerViewHeader.fromXml(getActivity(), R.layout.ind_recipe_header);
-        //RecyclerViewHeader my = RecyclerViewHeader.fromXml(getActivity(), R.layout.ind_recipe_layout);
+        RecyclerViewHeader header = RecyclerViewHeader.fromXml(getActivity(), R.layout.ind_recipe_header); //GIVES HEADER TO THE RECYCLER VIEW LIBARIES
         recnav.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -68,29 +76,20 @@ public class Recipe extends Fragment {
         IRAdapter nav = new IRAdapter(getActivity(), createList(4));
         //nav.setClicklistener(this);     //used for on click
         recnav.setAdapter(nav);
-       // my.attachTo(recnav);
         header.attachTo(recnav);
+
         Bundle bundle = getArguments();
 
-        RequestQueue requestQueue= VolleySingleton.getInstance().getRequestQueue();
-        StringRequest request=new StringRequest(Request.Method.GET, "http://php.net/", new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(getActivity(), "RESPONSE" + response, Toast.LENGTH_SHORT).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "ERROR" + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        requestQueue.add(request);
+
         return layout;
     }
 
+
+    //PASSING DATA INTO THE RECYLCER VIEW //TODO CHANGE THE VARIABLE NAME LATER
     private List<IndRecipeInfo> createList(int size) {
         List<IndRecipeInfo> result = null;
         try {
+            //TODO SAVE IT IN AN ARRAY IN STRING XML (UPDATE) :P
             String icons[] = {"http://s28.postimg.org/hh6fjx3rx/appetizermain.png",
                     "http://s18.postimg.org/x6hah93mx/maincourse.png",
                     "http://s24.postimg.org/6b3m8o0p1/meatmain.png",
@@ -105,7 +104,7 @@ public class Recipe extends Fragment {
                     "BAKED GOODS",
                     "SALAD",
                     "BREAKFAST"};
-*/
+            */
             result = new ArrayList<IndRecipeInfo>();
             for (int i = 0; i <= size; i++) {
                 IndRecipeInfo ci = new IndRecipeInfo();

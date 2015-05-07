@@ -100,11 +100,13 @@ public class MainActivity extends ActionBarActivity implements Communicator {
                 Toast.makeText(this, "Hey u just hit HOME POSITION" + position, Toast.LENGTH_SHORT).show();
                 transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
                 transaction.replace(R.id.fragmentpage, indRecipe);
+                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case 2:
                 Toast.makeText(this, "Hey u just hit HOME POSITION" + position, Toast.LENGTH_SHORT).show();
                 transaction.replace(R.id.fragmentpage, recipeList);
+                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case 3:
@@ -136,28 +138,6 @@ public class MainActivity extends ActionBarActivity implements Communicator {
 
         }
 
-       /* } else if (data == "ASS") {
-            switch (position) {
-                case 0: startActivity(new Intent(this, MainActivity.class));
-                    Toast.makeText(this, "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
-                    break;
-                case 1:
-                    Toast.makeText(this, "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
-                    break;
-                case 2:
-                    Toast.makeText(this, "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
-                    break;
-                case 3:
-                    Toast.makeText(this, "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
-                    break;
-                case 4:
-                    Toast.makeText(this, "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
-                    break;
-
-            }
-        }*/
-
-        // transaction.commit();
     }
 
 }

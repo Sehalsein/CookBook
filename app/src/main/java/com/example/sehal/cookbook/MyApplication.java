@@ -8,8 +8,8 @@ import android.content.Context;
  */
 public class MyApplication extends Application {
 
-    //public static final String API_KEY="dvxtJR73jmLSYoiYy6nT5agI52yxH7Ij";
-    public static final String API_KEY="54wzfswsa4qmjg8hjwa64d4c";
+    //public static final String API_KEY="dvxtJR73jmLSYoiYy6nT5agI52yxH7Ij"; //BIG OVEN API KEY
+    public static final String API_KEY="54wzfswsa4qmjg8hjwa64d4c";   //ROTTEN TOMATOES API KEY
 
     private static MyApplication sInstance;
 

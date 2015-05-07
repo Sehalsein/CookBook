@@ -15,13 +15,17 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 /**
- * Created by sehal on 4/26/2015.
+ * Created by sehal on 4/28/2015.
+ *
+ * THIS class is the ADAPTER FOR RECYCLEWR VIEW for RECIPE LIST
+ *   //TODO CHANGE THE VIEWHODER NAME
+ *
+ *
  */
 public class RLAapter extends RecyclerView.Adapter<RLAapter.CookingViewHolder> {
-    //RecyclerViewHeader header = RecyclerViewHeader.fromXml(this, R.layout.card_layout);
+
     private List<HomeInfo> cookList;
     Context context;
-    //public float rating=1f;
     private Clicklistener clicklistener;
     private Typeface roboto_reg, roboto_bold, roboto_thin;
 
@@ -63,6 +67,7 @@ public class RLAapter extends RecyclerView.Adapter<RLAapter.CookingViewHolder> {
 
     }
 
+    //GETTING THE LAYoUT FOR INDIVIADUAL ROWS //TODO CHECK IF CORRECT
     @Override
     public CookingViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
         View itemView = LayoutInflater.
@@ -72,10 +77,12 @@ public class RLAapter extends RecyclerView.Adapter<RLAapter.CookingViewHolder> {
         return new CookingViewHolder(itemView);
     }
 
+    //SETTING ON CLICK FOR EACH ROW //TODO FIX IT
     public void setClicklistener(Clicklistener clicklistener) {
         this.clicklistener = clicklistener;
     }
 
+    //DECLARING AND INTIALIZING VARIABLE //TODO CHANGE THE NAME OF VARIABLE
     public class CookingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         protected TextView vDishName;
@@ -100,6 +107,7 @@ public class RLAapter extends RecyclerView.Adapter<RLAapter.CookingViewHolder> {
         }
     }
 
+    //PASSES THE VALUE TO THE MAIN ACTIVITY
     public interface Clicklistener {
         public void itemClicked(View view, int position);
     }

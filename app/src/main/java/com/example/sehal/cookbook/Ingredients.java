@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link Ingredients#newInstance} factory method to
- * create an instance of this fragment.
+ * USED TO DISPLAY THE INGRIDIENTS FOR INDIVIADUAL RECIPE
+ * THIS FRAGMENT IS DISPLAYED USING IndRecipe.java CLASS
+ * NO CODING DONE TO THIS FRAGMENT YET //TODO COMING SOOn
  */
 public class Ingredients extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
