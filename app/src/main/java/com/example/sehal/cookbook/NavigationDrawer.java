@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,6 +37,8 @@ public class NavigationDrawer extends Fragment implements NAdapter.Clicklistener
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     Communicator comm;
+    FragmentManager manager;
+
 
     public NavigationDrawer() {
         // Required empty public constructor
@@ -59,10 +63,14 @@ public class NavigationDrawer extends Fragment implements NAdapter.Clicklistener
         nav.setClicklistener(this);
 
         //PROFILE PICTURE IN NAVIGATION DRAWER //TODO TRY TO GET A SMALLER CODE
-        ImageView DisplayPicture = (ImageView) layout.findViewById(R.id.displaypicture);
-        Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.dp);
-        DisplayPicture.setImageBitmap(icon);
+        CircleDP circularImageView = (CircleDP) layout.findViewById(R.id.displaypicture);
+        //circularImageView.setBorderColor(getResources().getColor(R.color.GrayLight));
+        circularImageView.setBorderWidth(3);
+        circularImageView.addShadow();
 
+
+        //FRAGMENT MANAGER DISPLATY CODE
+        manager = getFragmentManager();
         return layout;
     }
 
@@ -144,6 +152,7 @@ public class NavigationDrawer extends Fragment implements NAdapter.Clicklistener
     //ITEM CLICK THIS IS PASSED TO MAIN ACTIVITY
     @Override
     public void itemClickednav(View view, int position) {
+        FragmentTransaction transaction = manager.beginTransaction();
         switch (position) {
             case 1:
                 mDrawerLayout.closeDrawers();
@@ -151,6 +160,7 @@ public class NavigationDrawer extends Fragment implements NAdapter.Clicklistener
                 break;
             case 2:
                 mDrawerLayout.closeDrawers();
+                startActivity(new Intent(getActivity(), Favourite.class));
                 Toast.makeText(getActivity(), "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
                 break;
             case 3:

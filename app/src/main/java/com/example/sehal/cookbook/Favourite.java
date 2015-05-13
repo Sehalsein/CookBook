@@ -1,32 +1,33 @@
 package com.example.sehal.cookbook;
 
-import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import com.example.sehal.cookbook.tabs.SlidingTabLayout;
+import com.facebook.CallbackManager;
+import com.facebook.ProfileTracker;
 
 
-public class Settings extends ActionBarActivity implements Communicator {
+public class Favourite extends ActionBarActivity implements Communicator {
+
     FragmentManager manager;
+    ViewPager mPager;
+    SlidingTabLayout mTabs;
+    ProfileTracker mProfiletracker;
+    String name;
+    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
-
+        setContentView(R.layout.activity_favourite);
 
         //TOOL BAR CODE
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
@@ -40,23 +41,23 @@ public class Settings extends ActionBarActivity implements Communicator {
         NavigationDrawer drawerFragment =
                 (NavigationDrawer) getSupportFragmentManager()
                         .findFragmentById(R.id.fragment_nav_drawer);
+
         drawerFragment.setup(drawerLayout, toolbar);
 
-        //FRAGMENT HOME PAGE DISPLATY CODE
-        SettingHome settingHome = new SettingHome();
+
+        //FRAGMENT HOME PAGE DISPLATY
+        FavouriteHome fav = new FavouriteHome();
+
         manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.settings_fragment, settingHome);
+        transaction.add(R.id.fragmentfavpage, fav);
         transaction.commit();
-
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_settings, menu);
+        getMenuInflater().inflate(R.menu.menu_favourite, menu);
         return true;
     }
 
@@ -71,34 +72,12 @@ public class Settings extends ActionBarActivity implements Communicator {
         if (id == R.id.action_settings) {
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
-
-    //BUTTON CLICK RESPONSE
     @Override
     public void respond(int pos, String data) {
-        Account account = new Account();
-
-        FragmentTransaction transaction = manager.beginTransaction();
-        switch (pos) {
-            case 1:
-                Toast.makeText(this, "Hey u just hit Setings LAbel POSITION" + pos, Toast.LENGTH_SHORT).show();
-                break;
-            case 2:
-                Toast.makeText(this, "Hey u just hit Setings LAbel POSITION" + pos, Toast.LENGTH_SHORT).show();
-                break;
-
-            case 0:
-                Toast.makeText(this, "Hey u just hit HOME POSITION" + pos, Toast.LENGTH_SHORT).show();
-                transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-                transaction.replace(R.id.settings_fragment, account);
-                transaction.addToBackStack(null);
-                transaction.commit();
-                break;
-
-        }
 
     }
-
 }

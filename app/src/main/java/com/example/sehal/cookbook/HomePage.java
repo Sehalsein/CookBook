@@ -58,7 +58,7 @@ public class HomePage extends Fragment implements RAdapter.Clicklistener {
         List<HomeInfo> result = null;
         try {
             //TODO INSERT THE ARRAY DIRECTLY TO STRING XML FILE
-            String icons[] = {"http://s28.postimg.org/hh6fjx3rx/appetizermain.png",
+            String icons[] = {"http://s7.postimg.org/kv4ztya9n/Appetizer_Recipes_header.jpg",
                     "http://s18.postimg.org/x6hah93mx/maincourse.png",
                     "http://s24.postimg.org/6b3m8o0p1/meatmain.png",
                     "http://s28.postimg.org/uvo3toztp/bakedmain.png",
@@ -99,7 +99,7 @@ public class HomePage extends Fragment implements RAdapter.Clicklistener {
     //ITEM CLICK THIS IS PASSED TO MAIN ACTIVITY
     @Override
     public void itemClicked(View view, int position) {
-        comm.respond(position, "HOME PAGE");
+        comm.respond(position, "HOMEPAGE");
         //Toast.makeText(getActivity(), "Hey u just hit" + position, Toast.LENGTH_SHORT).show();
     }
 }

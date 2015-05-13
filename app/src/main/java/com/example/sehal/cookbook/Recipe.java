@@ -73,7 +73,7 @@ public class Recipe extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recnav.setLayoutManager(llm);
-        IRAdapter nav = new IRAdapter(getActivity(), createList(4));
+        IRAdapter nav = new IRAdapter(getActivity(), createList(6));
         //nav.setClicklistener(this);     //used for on click
         recnav.setAdapter(nav);
         header.attachTo(recnav);
@@ -90,12 +90,6 @@ public class Recipe extends Fragment {
         List<IndRecipeInfo> result = null;
         try {
             //TODO SAVE IT IN AN ARRAY IN STRING XML (UPDATE) :P
-            String icons[] = {"http://s28.postimg.org/hh6fjx3rx/appetizermain.png",
-                    "http://s18.postimg.org/x6hah93mx/maincourse.png",
-                    "http://s24.postimg.org/6b3m8o0p1/meatmain.png",
-                    "http://s28.postimg.org/uvo3toztp/bakedmain.png",
-                    "http://s14.postimg.org/aza926y1d/saladmain.png",
-                    "http://s12.postimg.org/eovd3crsd/breakfastmain.png"};
 
             //TODO SAVE IT IN AN ARRAY IN STRING XML (UPDATE) :P
             /*String homemenu[] = {"APPETIZER",
@@ -109,7 +103,7 @@ public class Recipe extends Fragment {
             for (int i = 0; i <= size; i++) {
                 IndRecipeInfo ci = new IndRecipeInfo();
                 ci.recipestep = "STEP "+i;
-                ci.recipesteppics= icons[i];
+                //ci.recipesteppics= icons[i];
                 ci.recipestepno=""+i;
                 result.add(ci);
             }

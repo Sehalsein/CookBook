@@ -4,27 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.sehal.cookbook.Settings">
+
+    tools:context=".MainActivity">
 
     <include
         android:id="@+id/app_bar"
         layout="@layout/app_bar" />
-
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-       <RelativeLayout
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:background="#FFF"
-           android:id="@+id/settings_fragment">
+        <RelativeLayout
+            android:id="@+id/fragmentfavpage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/app_bar"
+            android:background="#FFFFFF">
 
-
-       </RelativeLayout>
-
+        </RelativeLayout>
 
         <fragment
             android:id="@+id/fragment_nav_drawer"
@@ -34,7 +33,6 @@
             android:layout_gravity="start"
             app:layout="@layout/navigation_drawer"
             tools:layout="@layout/navigation_drawer" />
-
     </android.support.v4.widget.DrawerLayout>
 
 

@@ -23,6 +23,20 @@
             android:background="#000"
             android:scaleType="fitXY" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="@android:style/Widget.Material.Light.ProgressBar.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="50dp"
+                android:paddingTop="50dp" />
+        </RelativeLayout>
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
@@ -54,10 +68,11 @@
             style="@android:style/Widget.Material.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/linearLayout"
-            android:layout_alignParentEnd="true"
+            android:isIndicator="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:isIndicator="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="25dp" />
 
     </RelativeLayout>
 

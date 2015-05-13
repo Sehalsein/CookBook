@@ -35,11 +35,11 @@ public class RAdapter extends RecyclerView.Adapter<RAdapter.CookingViewHolder> {
         this.context = con;
         this.cookList = cookList;
 
-       /* //Initialize the fonts here from assets folder created TODO FONT
+        //Initialize the fonts here from assets folder created TODO FONT
         roboto_reg = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Regular.ttf");
         roboto_bold = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Bold.ttf");
         roboto_thin = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Thin.ttf");
-*/
+
     }
 
 
@@ -104,7 +104,7 @@ public class RAdapter extends RecyclerView.Adapter<RAdapter.CookingViewHolder> {
 
         protected TextView vDishName;
         ImageView vicon;
-         ProgressBar loading;
+        ProgressBar loading;
 
 
         public CookingViewHolder(View v) {

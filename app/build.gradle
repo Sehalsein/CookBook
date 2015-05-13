@@ -28,8 +28,7 @@ dependencies {
     compile 'com.parse.bolts:bolts-android:1.+'
     compile fileTree(dir: 'libs', include: 'Parse-*.jar')
     compile 'com.mcxiaoke.volley:library:1.0.+'
-
-
+    compile 'com.facebook.android:facebook-android-sdk:4.0.0'
 
 }
 

@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="match_parent"
+    android:background="@drawable/navigation_custom_row"
     android:clickable="true"
-    android:foreground="?attr/selectableItemBackground"
-    android:background="@drawable/custom_bg"
-    android:orientation="horizontal">
+    android:foreground="?attr/selectableItemBackground">
 
 
     <TextView
         android:id="@+id/settings_label"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/nav_vertical_item"
         android:layout_centerVertical="true"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="25dp"
-        android:text="Sehals SettingItem"
+        android:gravity="center"
+        android:paddingLeft="30dp"
+        android:text="Sehals NavItems"
         android:textColor="#000"
         android:textSize="15dp"
-        android:textStyle="bold"  />
+        android:textStyle="bold" />
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="@drawable/home" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/arrow"
+        android:paddingLeft="16dp"
+        android:scaleType="fitXY" />
 
 
-</LinearLayout>
+</RelativeLayout>

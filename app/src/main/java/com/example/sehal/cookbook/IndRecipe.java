@@ -43,6 +43,7 @@ public class IndRecipe extends Fragment {
         mPager.setAdapter(new MyPagerAdapter(getChildFragmentManager()));
         mTabs = (SlidingTabLayout) layout.findViewById(R.id.tabs);
         mTabs.setDistributeEvenly(true);
+      //  mTabs.setBackgroundColor(R.color.primarycolor);
         // mTabs.setCustomTabColorizer(#ffff);
         mTabs.setViewPager(mPager);
 

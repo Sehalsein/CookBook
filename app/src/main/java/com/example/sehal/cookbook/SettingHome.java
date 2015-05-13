@@ -93,7 +93,7 @@ public class SettingHome extends Fragment implements SAdapter.Clicklistener{
 
             //TODO INSERT THE ARRAY DIRECTLY TO STRING XML FILE
             String Slabel[] = {"My Account",
-                    "About",
+                    "About CookBook",
                     "FeedBack",};
 
             result = new ArrayList<SettingsInfo>();

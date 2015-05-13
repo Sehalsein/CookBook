@@ -21,6 +21,32 @@
             android:background="#000"
             android:scaleType="fitXY" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="@android:style/Widget.Holo.ProgressBar.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:paddingBottom="50dp"
+                android:paddingTop="50dp" />
+
+            <RatingBar
+                android:id="@+id/ratings"
+                style="@android:style/Widget.Holo.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="25dp" />
+        </RelativeLayout>
+
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="wrap_content"
@@ -45,16 +71,6 @@
                 android:textSize="15dp"
                 android:textStyle="bold" />
         </LinearLayout>
-
-        <RatingBar
-            style="@android:style/Widget.Holo.RatingBar.Small"
-            android:id="@+id/ratings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/linearLayout2"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:isIndicator="true" />
 
     </RelativeLayout>
 
