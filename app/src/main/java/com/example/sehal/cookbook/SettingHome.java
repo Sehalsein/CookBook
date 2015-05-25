@@ -22,7 +22,7 @@ import java.util.List;
  * ADAPTER OF THIS recycler view is SAdapter and the variable is nav //TODO CHANGE THE VARIABLE NAME
  *
  */
-public class SettingHome extends Fragment implements SAdapter.Clicklistener{
+public class SettingHome extends Fragment implements ClickListener{
 
     Communicator comm;
     // TODO: Rename parameter arguments, choose names that match

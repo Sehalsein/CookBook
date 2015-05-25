@@ -29,9 +29,9 @@ import java.util.List;
  * this class intitalizes a recycler view recnav  //TODO CHANGE THE VARIABLE NAME
  * cardList is assigned to recnav   //this is the name of the recycler thing in the xml file :P
  * Vertical Orientation  //TODO CHANGE THE VARIABLE NAME
- * ADAPTER OF THIS recycler view is RAdapter and the variable is nav //TODO CHANGE THE VARIABLE NAME
+ * ADAPTER OF THIS recycler view is RAdapter and the variable is nadapter //TODO CHANGE THE VARIABLE NAME
  */
-public class NavigationDrawer extends Fragment implements NAdapter.ClicklistenerNav {
+public class NavigationDrawer extends Fragment implements ClickListener {
 
     //Declaring variables
     private ActionBarDrawerToggle mDrawerToggle;
@@ -58,9 +58,9 @@ public class NavigationDrawer extends Fragment implements NAdapter.Clicklistener
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recnav.setLayoutManager(llm);
-        NAdapter nav = new NAdapter(getActivity(), createList(7));
-        recnav.setAdapter(nav);
-        nav.setClicklistener(this);
+        NAdapter nadapter = new NAdapter(getActivity(), createList(7));
+        recnav.setAdapter(nadapter);
+        nadapter.setClicklistener(this);
 
         //PROFILE PICTURE IN NAVIGATION DRAWER //TODO TRY TO GET A SMALLER CODE
         CircleDP circularImageView = (CircleDP) layout.findViewById(R.id.displaypicture);
@@ -151,27 +151,23 @@ public class NavigationDrawer extends Fragment implements NAdapter.Clicklistener
 
     //ITEM CLICK THIS IS PASSED TO MAIN ACTIVITY
     @Override
-    public void itemClickednav(View view, int position) {
-        FragmentTransaction transaction = manager.beginTransaction();
+    public void itemClicked(View view, int position) {
         switch (position) {
             case 1:
                 mDrawerLayout.closeDrawers();
-                Toast.makeText(getActivity(), "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), Search.class));
                 break;
             case 2:
                 mDrawerLayout.closeDrawers();
                 startActivity(new Intent(getActivity(), Favourite.class));
-                Toast.makeText(getActivity(), "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
                 break;
             case 3:
                 mDrawerLayout.closeDrawers();
                 startActivity(new Intent(getActivity(), Settings.class));
-                Toast.makeText(getActivity(), "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
                 break;
             case 0:
                 startActivity(new Intent(getActivity(), MainActivity.class));
                 mDrawerLayout.closeDrawers();
-                Toast.makeText(getActivity(), "Hey u just hit NAVIGATION DRAWER POSITION" + position, Toast.LENGTH_SHORT).show();
                 break;
         }
     }

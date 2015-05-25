@@ -24,11 +24,11 @@ import javax.security.auth.callback.Callback;
  *
  *
  */
-public class RAdapter extends RecyclerView.Adapter<RAdapter.CookingViewHolder> {
+public class RAdapter extends RecyclerView.Adapter<RAdapter.HomeViewHolder> {
 
     private List<HomeInfo> cookList;
     Context context;
-    private Clicklistener clicklistener;
+    private ClickListener clicklistener;
     private Typeface roboto_reg, roboto_bold, roboto_thin;
 
     public RAdapter(Context con, List<HomeInfo> cookList) {
@@ -51,32 +51,29 @@ public class RAdapter extends RecyclerView.Adapter<RAdapter.CookingViewHolder> {
 
     //ASSIGNING VALUES PASSED FROM THE CLASS
     @Override
-    public void onBindViewHolder(final CookingViewHolder cookingViewHolder, int viewType) {
-
-
+    public void onBindViewHolder(final HomeViewHolder HomeViewHolder, int viewType) {
+        
         HomeInfo ci = cookList.get(viewType);
-
-        cookingViewHolder.loading.setVisibility(View.VISIBLE);
+        HomeViewHolder.vloading.setVisibility(View.VISIBLE);
         Picasso.with(context)
                 .load(ci.iconid)
-                .error(R.drawable.error)
-                .into(cookingViewHolder.vicon, new com.squareup.picasso.Callback() {
+                .error(R.drawable.error) //TODO CHANGE TH
+                .into(HomeViewHolder.vCategoryImage, new com.squareup.picasso.Callback() {
                     @Override
                     public void onSuccess() {
-                        cookingViewHolder.loading.setVisibility(View.GONE);
+                        HomeViewHolder.vloading.setVisibility(View.GONE);
                     }
-
                     @Override
                     public void onError() {
-                        cookingViewHolder.loading.setVisibility(View.GONE);
+                        HomeViewHolder.vloading.setVisibility(View.GONE);
                         //NOTHING
                     }
                 });
 
         Picasso.with(context).setIndicatorsEnabled(true);
-        cookingViewHolder.vDishName.setText(ci.dishname);
+        HomeViewHolder.vCategoryName.setText(ci.dishname);
         //Set the font here
-        cookingViewHolder.vDishName.setTypeface(roboto_reg);
+        HomeViewHolder.vCategoryName.setTypeface(roboto_reg);
 
 
     }
@@ -84,48 +81,42 @@ public class RAdapter extends RecyclerView.Adapter<RAdapter.CookingViewHolder> {
 
     //GETTING THE LAYoUT FOR INDIVIADUAL ROWS //TODO CHECK IF CORRECT
     @Override
-    public CookingViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
+    public HomeViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
                 inflate(R.layout.card_layout, viewGroup, false);
 
-        return new CookingViewHolder(itemView);
+        return new HomeViewHolder(itemView);
     }
 
 
     //SETTING ON CLICK FOR EACH ROW
-    public void setClicklistener(Clicklistener clicklistener) {
+    public void setClicklistener(ClickListener clicklistener) {
         this.clicklistener = clicklistener;
     }
 
 
     //DECLARING AND INTIALIZING VARIABLE //TODO CHANGE THE NAME OF VARIABLE
-    public class CookingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        protected TextView vDishName;
-        ImageView vicon;
-        ProgressBar loading;
+        protected TextView vCategoryName;
+        ImageView vCategoryImage;
+        ProgressBar vloading;
 
 
-        public CookingViewHolder(View v) {
+        public HomeViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            vDishName = (TextView) v.findViewById(R.id.dish_name);
-            vicon = (ImageView) v.findViewById(R.id.imageView);
-            loading= (ProgressBar) v.findViewById(R.id.progress);
+            vCategoryName = (TextView) v.findViewById(R.id.category_name);
+            vCategoryImage = (ImageView) v.findViewById(R.id.category_image);
+            vloading= (ProgressBar) v.findViewById(R.id.progress);
         }
 
         @Override
         public void onClick(View v) {
-            //context.startActivity(new Intent(context, SubActivity.class));
             if (clicklistener != null) {
                 clicklistener.itemClicked(v, getPosition());
             }
         }
-    }
-
-    //PASSES THE VALUE TO THE MAIN ACTIVITY
-    public interface Clicklistener {
-        public void itemClicked(View view, int position);
     }
 }

@@ -16,18 +16,6 @@ public class RecipeInfo {
 
     }
 
-    public RecipeInfo(String id,
-                      String title,
-                      int rating,
-                      String urlThumbnail
-    ) {
-
-        this.id = id;
-        this.title = title;
-        this.rating = rating;
-        this.urlThumbnail = urlThumbnail;
-    }
-
     public String getId(){
         return id;
     }

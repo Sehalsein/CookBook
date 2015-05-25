@@ -10,6 +10,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Transition;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,31 +34,33 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.drakeet.materialdialog.MaterialDialog;
+
 import static com.example.sehal.cookbook.Keys.EndpointRecipe.*;
 
 
 /**
  * THIS class is the code FOR recipe_list.xml
- * this class intitalizes a recycler view recnav  //TODO CHANGE THE VARIABLE NAME
- * cardList is assigned to recnav   //this is the name of the recycler thing in the xml file :P
+ * this class intitalizes a recycler view rrecipelist  //TODO CHANGE THE VARIABLE NAME
+ * cardList is assigned to rrecipelist   //this is the name of the recycler thing in the xml file :P
  * Vertical Orientation  //TODO CHANGE THE VARIABLE NAME
  * ADAPTER OF THIS recycler view is RLAdapter and the variable is nav //TODO CHANGE THE VARIABLE NAME
  */
-public class RecipeList extends Fragment {//implements RLAapter.Clicklistener {
+public class RecipeList extends Fragment implements RLAapter.RLCLickListner {//implements RLAapter.Clicklistener {
 
     //Declaring variables
     //public static final String URL_RECIPE = "http://api.bigoven.com/recipes?title_kw=oysters&pg=1";
     //public static final String URL_RECIPE = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json";
     public static final String URL_RECIPE = "http://food2fork.com/api/search";
     Communicator comm;
+
     RatingBar ratings;
     FragmentManager manager;
     private ImageLoader imageLoader;
     private VolleySingleton volleySingleton;
     private RequestQueue requestQueue;
-    private ArrayList<RecipeInfo> recipelists =new ArrayList<>();
+    private ArrayList<RecipeInfo> recipelists = new ArrayList<>();
     RLAapter rlAapter;
-
 
 
     //DECALRING THE URL FOR THE API IN ONE STRING
@@ -67,7 +70,6 @@ public class RecipeList extends Fragment {//implements RLAapter.Clicklistener {
     }
 
     public RecipeList() {
-
 
         // Required empty public constructor
     }
@@ -83,20 +85,19 @@ public class RecipeList extends Fragment {//implements RLAapter.Clicklistener {
 
     public void sendjsonrequest() {
         //DECLARING A JSONOBJECT FOR API
-
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, getRequestUrl(10), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-               // L.t(getActivity(), response.toString());
                 rlAapter.setRecipeInfo(parseJsonresponse(response));
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "ERROR" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "RECIPELISTERROR" + error.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
+
         requestQueue.add(request);
     }
 
@@ -110,26 +111,23 @@ public class RecipeList extends Fragment {//implements RLAapter.Clicklistener {
         manager = getFragmentManager();
 
         //RECYCLER VIEW SETUP (RECIPE LIST) //TODO CHANGE THE VARIABLE NAME LATER
-        RecyclerView recnav = (RecyclerView) layout.findViewById(R.id.recipeList);
-        recnav.setHasFixedSize(true);
+        RecyclerView rrecipelist = (RecyclerView) layout.findViewById(R.id.recipeList);
+        rrecipelist.setHasFixedSize(true);
         GridLayoutManager llm = new GridLayoutManager(getActivity(), 2);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recnav.setLayoutManager(llm);
-       // RLAapter nav = new RLAapter(getActivity(), createList(4));
-        //nav.setClicklistener(this);     //used for on click
-       // recnav.setAdapter(nav);
-        rlAapter=new RLAapter(getActivity());
-        recnav.setAdapter(rlAapter);
+        rrecipelist.setLayoutManager(llm);
+        rlAapter = new RLAapter(getActivity());
+        rlAapter.setClicklistener(this);
+        rrecipelist.setAdapter(rlAapter);
 
         return layout;
     }
 
     private ArrayList<RecipeInfo> parseJsonresponse(JSONObject response) {
-        ArrayList<RecipeInfo> listrecipe=new ArrayList<>();
+        ArrayList<RecipeInfo> listrecipe = new ArrayList<>();
         if (response != null && response.length() > 0) {
             try {
                 StringBuilder data = new StringBuilder();
-
                 JSONArray arrayrecipes = response.getJSONArray(KEY_RECIPES);
                 for (int i = 0; i < arrayrecipes.length(); i++) {
                     JSONObject currentrecipe = arrayrecipes.getJSONObject(i);
@@ -145,12 +143,7 @@ public class RecipeList extends Fragment {//implements RLAapter.Clicklistener {
                     recipeInfo.setRating(ratings);
                     recipeInfo.setUrlThumbnail(image);
                     listrecipe.add(recipeInfo);
-
-
                 }
-                L.t(getActivity(), listrecipe.toString());
-
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -166,6 +159,20 @@ public class RecipeList extends Fragment {//implements RLAapter.Clicklistener {
     public void onActivityCreated(Bundle savedInstanceState) {
         comm = (Communicator) getActivity();
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void itemClicked(View view, String Id) {
+        comm.respond(99, Id);
+       // Log.d("indo",indo);
+         //      Toast.makeText(getActivity(), "RECIPELISTERROR" + position, Toast.LENGTH_SHORT).show();
+       // comm.respond(99,"sadsda");
+        /*IndRecipe indRecipe = new IndRecipe();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+        transaction.replace(R.id.fragmentpage, indRecipe);
+        transaction.addToBackStack(null);
+        transaction.commit();*/
 
     }
 

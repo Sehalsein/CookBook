@@ -46,6 +46,7 @@ public class MainActivity extends ActionBarActivity implements Communicator {
     ProfileTracker mProfiletracker;
     String name;
     CallbackManager callbackManager;
+    public static String IDNO;
 
 
     @Override
@@ -58,6 +59,7 @@ public class MainActivity extends ActionBarActivity implements Communicator {
         Profile profile = Profile.getCurrentProfile();
         if (profile != null) {
             name = profile.getName();
+            parsesetup(name);
         }
         mProfiletracker = new ProfileTracker() {
             @Override
@@ -132,66 +134,24 @@ public class MainActivity extends ActionBarActivity implements Communicator {
         HomePage homePage = new HomePage();
         RecipeList recipeList = new RecipeList();
         IndRecipe indRecipe = new IndRecipe();
+        Ingredients ING = new Ingredients();
+        Recipe rec = new Recipe();
         Account account = new Account();
-        final MaterialDialog mMaterialDialog = new MaterialDialog(this);
 
         FragmentTransaction transaction = manager.beginTransaction();
+        if (position == 99) {
+            IDNO=data.toString();
+            transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+            transaction.replace(R.id.fragmentpage, indRecipe);
+            transaction.addToBackStack(null);
+            transaction.commit();
 
-        Toast.makeText(this, "Hey u just hit HOME POSITION" + position, Toast.LENGTH_SHORT).show();
-        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-        transaction.replace(R.id.fragmentpage, recipeList);
-        transaction.addToBackStack(null);
-        transaction.commit();
-
-
-
-       /* switch (position) {
-            case 0:
-                Toast.makeText(this, "Hey u just hit HOME POSITION" + position, Toast.LENGTH_SHORT).show();
-                break;
-            case 1:
-                Toast.makeText(this, "Hey u just hit HOME POSITION" + position, Toast.LENGTH_SHORT).show();
-                transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-                transaction.replace(R.id.fragmentpage, indRecipe);
-                transaction.addToBackStack(null);
-                transaction.commit();
-                break;
-            case 2:
-                Toast.makeText(this, "Hey u just hit HOME POSITION" + position, Toast.LENGTH_SHORT).show();
-                transaction.replace(R.id.fragmentpage, recipeList);
-                transaction.addToBackStack(null);
-                transaction.commit();
-                break;
-            case 3:
-                mMaterialDialog.setTitle("Information")
-                        .setMessage("Hello world!")
-                        .setPositiveButton("OK", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                mMaterialDialog.dismiss();
-                            }
-                        });
-                         /*
-                        .setNegativeButton("CANCEL", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                mMaterialDialog.dismiss();
-
-                            }
-                        });
-
-                mMaterialDialog.show();
-                Toast.makeText(this, "Hey u just hit HOME POSITION" + position, Toast.LENGTH_SHORT).show();
-                break;
-            case 4:
-                Toast.makeText(this, "Hey u just hit HOME POSITION" + position, Toast.LENGTH_SHORT).show();
-                transaction.replace(R.id.fragmentpage, account);
-                transaction.addToBackStack(null);
-                transaction.commit();
-                break;
-
-        }*/
-
+        } else {
+            transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+            transaction.replace(R.id.fragmentpage, recipeList);
+            transaction.addToBackStack(null);
+            transaction.commit();
+       }
     }
 
     public void parsesetup(String loginusername) {
@@ -217,7 +177,6 @@ public class MainActivity extends ActionBarActivity implements Communicator {
     @Override
     protected void onPause() {
         super.onPause();
-
         // Logs 'app deactivate' App Event.
         AppEventsLogger.deactivateApp(this);
     }

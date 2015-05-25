@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by sehal on 5/11/2015.
  */
-public class FavouriteHome extends Fragment implements FAdapter.Clicklistener {
+public class FavouriteHome extends Fragment implements ClickListener {
 
     FragmentManager manager;
     public FavouriteHome() {
@@ -31,14 +31,14 @@ public class FavouriteHome extends Fragment implements FAdapter.Clicklistener {
         View layout = inflater.inflate(R.layout.favourite_home, container, false);
 
         //RECYCLER VIEW SETUP (RECIPE LIST) //TODO CHANGE THE VARIABLE NAME LATER
-        RecyclerView recnav = (RecyclerView) layout.findViewById(R.id.favrecipeList);
-        recnav.setHasFixedSize(true);
+        RecyclerView rfavhome = (RecyclerView) layout.findViewById(R.id.favrecipeList);
+        rfavhome.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recnav.setLayoutManager(llm);
-        FAdapter nav = new FAdapter(getActivity(), createList(4));
-        nav.setClicklistener(this);     //used for on click
-        recnav.setAdapter(nav);
+        rfavhome.setLayoutManager(llm);
+        FAdapter fadapter = new FAdapter(getActivity(), createList(4));
+        fadapter.setClicklistener(this);     //used for on click
+        rfavhome.setAdapter(fadapter);
 
 
         //Fragment
@@ -70,8 +70,7 @@ public class FavouriteHome extends Fragment implements FAdapter.Clicklistener {
             result = new ArrayList<FavInfo>();
             for (int i = 0; i <= size; i++) {
                 FavInfo ci = new FavInfo();
-                ci.dishname = "" + i;//homemenu[i];
-                // ci.iconid = icons[i];
+                ci.dishname = "" + i;
                 result.add(ci);
             }
         } catch (Exception e) {

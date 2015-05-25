@@ -79,24 +79,33 @@ public class Settings extends ActionBarActivity implements Communicator {
     @Override
     public void respond(int pos, String data) {
         Account account = new Account();
+        Feedback feedback=new Feedback();
+        About about=new About();
 
         FragmentTransaction transaction = manager.beginTransaction();
         switch (pos) {
             case 1:
-                Toast.makeText(this, "Hey u just hit Setings LAbel POSITION" + pos, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Hey u just hit Setings LAbel POSITION" + pos, Toast.LENGTH_SHORT).show();
+                transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                transaction.replace(R.id.settings_fragment, about);
+                transaction.addToBackStack(null);
+                transaction.commit();
                 break;
             case 2:
-                Toast.makeText(this, "Hey u just hit Setings LAbel POSITION" + pos, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "Hey u just hit Setings LAbel POSITION" + pos, Toast.LENGTH_SHORT).show();
+                transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                transaction.replace(R.id.settings_fragment, feedback);
+                transaction.addToBackStack(null);
+                transaction.commit();
                 break;
 
             case 0:
-                Toast.makeText(this, "Hey u just hit HOME POSITION" + pos, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Hey u just hit HOME POSITION" + pos, Toast.LENGTH_SHORT).show();
                 transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
                 transaction.replace(R.id.settings_fragment, account);
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;
-
         }
 
     }

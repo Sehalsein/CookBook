@@ -12,19 +12,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * THIS class is the code FOR home_page.xml
- * this class intitalizes a recycler view recnav  //TODO CHANGE THE VARIABLE NAME
- * cardList is assigned to recnav   //this is the name of the recycler thing in the xml file :P
+ * this class intitalizes a recycler view rhomepage  //TODO CHANGE THE VARIABLE NAME
+ * cardList is assigned to rhomepage   //this is the name of the recycler thing in the xml file :P
  * Vertical Orientation  //TODO CHANGE THE VARIABLE NAME
- * ADAPTER OF THIS recycler view is RAdapter and the variable is nav //TODO CHANGE THE VARIABLE NAME
- *
+ * ADAPTER OF THIS recycler view is RAdapter and the variable is radapter //TODO CHANGE THE VARIABLE NAME
  */
 
-public class HomePage extends Fragment implements RAdapter.Clicklistener {
+public class HomePage extends Fragment implements ClickListener {
 
     Communicator comm; //Declaring the Communication interface variable used to communicating between different fragment
 
@@ -40,15 +40,15 @@ public class HomePage extends Fragment implements RAdapter.Clicklistener {
         View layout = inflater.inflate(R.layout.home_page, container, false);
 
 
-        //RECYCLER VIEW SETUP (HOME PAGE) //TODO CHANGE THE VARIABLE NAME LATER
-        RecyclerView recnav = (RecyclerView) layout.findViewById(R.id.cardList);
-        recnav.setHasFixedSize(true);
+        //RECYCLER VIEW SETUP (HOME PAGE) 
+        RecyclerView rhomepage = (RecyclerView) layout.findViewById(R.id.cardList);
+        rhomepage.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recnav.setLayoutManager(llm);
-        RAdapter nav = new RAdapter(getActivity(), createList(7));
-        nav.setClicklistener(this);     //used for on click
-        recnav.setAdapter(nav);
+        rhomepage.setLayoutManager(llm);
+        RAdapter radapter = new RAdapter(getActivity(), createList(7));
+        radapter.setClicklistener(this);     //used for on click
+        rhomepage.setAdapter(radapter);
 
         return layout;
     }
@@ -92,14 +92,11 @@ public class HomePage extends Fragment implements RAdapter.Clicklistener {
     public void onActivityCreated(Bundle savedInstanceState) {
         comm = (Communicator) getActivity();
         super.onActivityCreated(savedInstanceState);
-
     }
 
-
-    //ITEM CLICK THIS IS PASSED TO MAIN ACTIVITY
+    //ITEM CLICK THIS IS PASSED TO MAIN ACTIVITY makes it faster i think
     @Override
     public void itemClicked(View view, int position) {
         comm.respond(position, "HOMEPAGE");
-        //Toast.makeText(getActivity(), "Hey u just hit" + position, Toast.LENGTH_SHORT).show();
     }
 }

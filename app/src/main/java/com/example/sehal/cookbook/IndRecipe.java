@@ -12,6 +12,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sehal.cookbook.tabs.SlidingTabLayout;
 
@@ -26,9 +28,12 @@ public class IndRecipe extends Fragment {
     //INITIALIING
     ViewPager mPager;
     SlidingTabLayout mTabs;
+    TextView name;
 
-    public IndRecipe() {
-        // Required empty public constructor
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        name = (TextView) getActivity().findViewById(R.id.recipename);
     }
 
 
@@ -43,14 +48,11 @@ public class IndRecipe extends Fragment {
         mPager.setAdapter(new MyPagerAdapter(getChildFragmentManager()));
         mTabs = (SlidingTabLayout) layout.findViewById(R.id.tabs);
         mTabs.setDistributeEvenly(true);
-      //  mTabs.setBackgroundColor(R.color.primarycolor);
+        //  mTabs.setBackgroundColor(R.color.primarycolor);
         // mTabs.setCustomTabColorizer(#ffff);
         mTabs.setViewPager(mPager);
-
-
         return layout;
     }
-
 
     //THIS CLASS iS USED AS AN ADAPTER TO SWTITCH BETWEEN TWO FRAGMENTS IN VIEW PAGER
     class MyPagerAdapter extends FragmentPagerAdapter {

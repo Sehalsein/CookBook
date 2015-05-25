@@ -19,7 +19,7 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NavigationViewHolder
 
     private List<NavigationInfo> navigationList;
     public Context context;
-    private ClicklistenerNav clicklistenernav;
+    private ClickListener clicklistener;
 
 
     public NAdapter(Context context, List<NavigationInfo> navigationList) {
@@ -39,8 +39,8 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NavigationViewHolder
 
         NavigationInfo ci = navigationList.get(position);
 
-        navigationViewHolder.vicon.setImageResource(ci.Icon);
-        navigationViewHolder.vText.setText(ci.Text);
+        navigationViewHolder.vNavIcon.setImageResource(ci.Icon);
+        navigationViewHolder.vNavText.setText(ci.Text);
 
     }
 
@@ -55,37 +55,30 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NavigationViewHolder
     }
 
     //SETTING ON CLICK FOR EACH ROW
-    public void setClicklistener(ClicklistenerNav clicklistenernav) {
-        this.clicklistenernav = clicklistenernav;
+    public void setClicklistener(ClickListener clicklistener) {
+        this.clicklistener = clicklistener;
     }
 
     //DECLARING AND INTIALIZING VARIABLE //TODO CHANGE THE NAME OF VARIABLE
     public class NavigationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        protected TextView vText;
-        ImageView vicon;
+        protected TextView vNavText;
+        ImageView vNavIcon;
 
         public NavigationViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            vText = (TextView) v.findViewById(R.id.nav_text_name);
-            vicon = (ImageView) v.findViewById(R.id.ImageView);
+            vNavText = (TextView) v.findViewById(R.id.nav_text_name);
+            vNavIcon = (ImageView) v.findViewById(R.id.nav_icon);
         }
 
         @Override
         public void onClick(View v) {
-            //context.startActivity(new Intent(context, SubActivity.class));
-            if (clicklistenernav != null) {
-                Log.d("SEHAL", "SADd");
-                clicklistenernav.itemClickednav(v, getPosition());
+            if (clicklistener != null) {
+                clicklistener.itemClicked(v, getPosition());
             }
         }
-    }
-
-    //PASSES THE VALUE TO THE MAIN ACTIVITY
-    public interface ClicklistenerNav {
-
-        public void itemClickednav(View view, int position);
-
+        
+        
     }
 }

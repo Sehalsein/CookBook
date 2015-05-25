@@ -49,13 +49,13 @@ public class Account extends Fragment {
             Profile profile = Profile.getCurrentProfile();
 
             if (profile != null) {
-               // displaypicture.setImageURI(profile.getProfilePictureUri(50,50));
-                DISPLAY_PICTURE_URL=" https://graph.facebook.com/"+profile.getId()+"/picture?height=200&width=200&migration_overrides=%7Boctober_2012%3Atrue%7D";
+                // displaypicture.setImageURI(profile.getProfilePictureUri(50,50));
+                DISPLAY_PICTURE_URL = " https://graph.facebook.com/" + profile.getId() + "/picture?height=200&width=200&migration_overrides=%7Boctober_2012%3Atrue%7D";
                 Picasso.with(getActivity())
                         .load(DISPLAY_PICTURE_URL)
                         .into(displaypicture);
-                UserName=profile.getName();
-               // UserName.setText("Welcome " + profile.getName());
+                UserName = profile.getName();
+                // UserName.setText("Welcome " + profile.getName());
                 Toast.makeText(getActivity(), "Welcome " + profile.getName(), Toast.LENGTH_SHORT).show();
 
             }
@@ -63,12 +63,12 @@ public class Account extends Fragment {
 
         @Override
         public void onCancel() {
-            Toast.makeText(getActivity(), "Cancel", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "ACCOUNTCancel", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onError(FacebookException e) {
-            Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "ACCOUNTERROR", Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -92,8 +92,10 @@ public class Account extends Fragment {
             @Override
             protected void onCurrentProfileChanged(Profile oldprofile, Profile newprofile) {
                 if (newprofile != null) {
-                    Toast.makeText(getActivity(), "Welcome new " + newprofile.getName(), Toast.LENGTH_SHORT).show();
-                    UserName=newprofile.getName();
+                    DISPLAY_PICTURE_URL = " https://graph.facebook.com/" + newprofile.getId() + "/picture?height=200&width=200&migration_overrides=%7Boctober_2012%3Atrue%7D";
+                    Picasso.with(getActivity())
+                            .load(DISPLAY_PICTURE_URL)
+                            .into(displaypicture);
                 }
             }
         };
@@ -109,11 +111,11 @@ public class Account extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_account, container, false);
 
         //CIRCLE DP
-        displaypicture= (ImageView) layout.findViewById(R.id.displaypicture);
-       // displaypicture.setImageResource(R.drawable.dp);
+        displaypicture = (ImageView) layout.findViewById(R.id.displaypicture);
+        // displaypicture.setImageResource(R.drawable.dp);
 
         CircleDP circularImageView = (CircleDP) layout.findViewById(R.id.displaypicture);
-        //circularImageView.setBorderColor(getResources().getColor(R.color.GrayLight));
+        circularImageView.setBorderColor(getResources().getColor(R.color.dividercolor));
         circularImageView.setBorderWidth(3);
         circularImageView.addShadow();
 
@@ -148,7 +150,10 @@ public class Account extends Fragment {
         super.onResume();
         Profile profile = Profile.getCurrentProfile();
         if (profile != null) {
-            //UserName.setText("Welcome " + profile.getName());
+            DISPLAY_PICTURE_URL = " https://graph.facebook.com/" + profile.getId() + "/picture?height=200&width=200&migration_overrides=%7Boctober_2012%3Atrue%7D";
+            Picasso.with(getActivity())
+                    .load(DISPLAY_PICTURE_URL)
+                    .into(displaypicture);
         }
     }
 

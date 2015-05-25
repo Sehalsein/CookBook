@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/navigation_custom_row"
+    android:id="@+id/settings_layout"
+    android:background="@drawable/settings_custom_row"
     android:clickable="true"
     android:foreground="?attr/selectableItemBackground">
 
@@ -15,7 +16,7 @@
         android:gravity="center"
         android:paddingLeft="30dp"
         android:text="Sehals NavItems"
-        android:textColor="#000"
+        android:textColor="@color/texticon"
         android:textSize="15dp"
         android:textStyle="bold" />
 

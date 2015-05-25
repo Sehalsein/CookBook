@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.provider.SyncStateContract;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,13 +27,14 @@ import java.util.List;
  * THIS class is the ADAPTER FOR RECYCLEWR VIEW for RECIPE LIST
  * //TODO CHANGE THE VIEWHODER NAME
  */
-public class RLAapter extends RecyclerView.Adapter<RLAapter.CookingViewHolder> {
+public class RLAapter extends RecyclerView.Adapter<RLAapter.RecipleListViewHolder> {
 
     //contains the list of RecipeInfos
     private ArrayList<RecipeInfo> mRecipeList = new ArrayList<>();
     private LayoutInflater mInflater;
     private VolleySingleton mVolleySingleton;
     private ImageLoader mImageLoader;
+    private RLCLickListner clicklistener;
     //formatter for parsing the dates in the specified format below
     //private DateFormat mFormatter = new SimpleDateFormat("yyyy-MM-dd");
     //keep track of the previous position for animations where scrolling down requires a different animation compared to scrolling up
@@ -52,14 +54,18 @@ public class RLAapter extends RecyclerView.Adapter<RLAapter.CookingViewHolder> {
     }
 
     @Override
-    public CookingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecipleListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.recipe_list_card, parent, false);
-        CookingViewHolder viewHolder = new CookingViewHolder(view);
+        RecipleListViewHolder viewHolder = new RecipleListViewHolder(view);
         return viewHolder;
     }
 
+    public void setClicklistener(RLCLickListner clicklistener) {
+        this.clicklistener = clicklistener;
+    }
+
     @Override
-    public void onBindViewHolder(CookingViewHolder holder, int position) {
+    public void onBindViewHolder(RecipleListViewHolder holder, int position) {
         RecipeInfo currentRecipeInfo = mRecipeList.get(position);
         //one or more fields of the RecipeInfo object may be null since they are fetched from the web
         holder.vDishName.setText(currentRecipeInfo.getTitle());
@@ -72,12 +78,12 @@ public class RLAapter extends RecyclerView.Adapter<RLAapter.CookingViewHolder> {
     }
 
 
-    private void loadImages(String urlThumbnail, final CookingViewHolder holder) {
+    private void loadImages(String urlThumbnail, final RecipleListViewHolder holder) {
         // if (!urlThumbnail.equals(SyncStateContract.Constants.NA)) {
         mImageLoader.get(urlThumbnail, new ImageLoader.ImageListener() {
             @Override
             public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
-                holder.vicon.setImageBitmap(response.getBitmap());
+                holder.vDishaImage.setImageBitmap(response.getBitmap());
                 holder.loading.setVisibility(View.GONE);
             }
 
@@ -94,20 +100,35 @@ public class RLAapter extends RecyclerView.Adapter<RLAapter.CookingViewHolder> {
         return mRecipeList.size();
     }
 
-    static class CookingViewHolder extends RecyclerView.ViewHolder {
+    public class RecipleListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        ImageView vicon;
+        ImageView vDishaImage;
         TextView vDishName;
         RatingBar ratings;
         ProgressBar loading;
 
-        public CookingViewHolder(View v) {
+        public RecipleListViewHolder(View v) {
             super(v);
+            v.setOnClickListener(this);
             vDishName = (TextView) v.findViewById(R.id.dish_name);
-            vicon = (ImageView) v.findViewById(R.id.imageView);
+            vDishaImage = (ImageView) v.findViewById(R.id.dish_image);
             loading = (ProgressBar) v.findViewById(R.id.progress);
             ratings = (RatingBar) v.findViewById(R.id.ratings);
 
         }
+
+        @Override
+        public void onClick(View v) {
+            if (clicklistener != null) {
+                RecipeInfo currentRecipeInfo = mRecipeList.get(getPosition());
+                String idno=currentRecipeInfo.getId();
+                clicklistener.itemClicked(v,idno);
+            }
+        }
     }
+
+    public interface RLCLickListner{
+        public void itemClicked(View view,String id);
+    }
+
 }

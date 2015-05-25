@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -20,11 +21,11 @@ import java.util.List;
  * THIS class is the ADAPTER FOR RECYCLEWR VIEW for SettingHome
  * //TODO CHANGE THE VIEWHODER NAME
  */
-public class SAdapter extends RecyclerView.Adapter<SAdapter.CookingViewHolder> {
+public class SAdapter extends RecyclerView.Adapter<SAdapter.SettingViewHolder> {
 
     private List<SettingsInfo> cookList;
     Context context;
-    private Clicklistener clicklistener;
+    private ClickListener clicklistener;
     private Typeface roboto_reg, roboto_bold, roboto_thin,wa;
 
     public SAdapter(Context con, List<SettingsInfo> cookList) {
@@ -46,10 +47,15 @@ public class SAdapter extends RecyclerView.Adapter<SAdapter.CookingViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final CookingViewHolder cookingViewHolder, int viewType) {
+    public void onBindViewHolder(final SettingViewHolder cookingViewHolder, int position) {
 
-        SettingsInfo ci = cookList.get(viewType);
+        SettingsInfo ci = cookList.get(position);
+        if (position==1){
+            cookingViewHolder.settingslayout.setBackgroundColor(R.color.accentColor);
+        }
         cookingViewHolder.msettingsLabel.setText(ci.settingsLabel);
+        
+
 
         //Set the font here
         cookingViewHolder.msettingsLabel.setTypeface(roboto_bold);
@@ -58,32 +64,32 @@ public class SAdapter extends RecyclerView.Adapter<SAdapter.CookingViewHolder> {
 
     //GETTING THE LAYoUT FOR INDIVIADUAL ROWS //TODO CHECK IF CORRECT
     @Override
-    public CookingViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
+    public SettingViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
                 inflate(R.layout.settings_list, viewGroup, false);
 
-       /* if(position==0)
-        {
-            itemView.setBackgroundColor(000000);
-        }*/
-        return new CookingViewHolder(itemView);
+      
+        return new SettingViewHolder(itemView);
     }
 
     //SETTING ON CLICK FOR EACH ROW
-    public void setClicklistener(Clicklistener clicklistener) {
+    public void setClicklistener(ClickListener clicklistener) {
         this.clicklistener = clicklistener;
     }
 
 
     //DECLARING AND INTIALIZING VARIABLE //TODO CHANGE THE NAME OF VARIABLE
-    public class CookingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class SettingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         protected TextView msettingsLabel;
+        RelativeLayout settingslayout;
 
-        public CookingViewHolder(View v) {
+        public SettingViewHolder(View v) {
             super(v);
+
             v.setOnClickListener(this);
+            settingslayout= (RelativeLayout) v.findViewById(R.id.settings_layout);
             msettingsLabel = (TextView) v.findViewById(R.id.settings_label);
 
         }
@@ -95,10 +101,6 @@ public class SAdapter extends RecyclerView.Adapter<SAdapter.CookingViewHolder> {
                 clicklistener.itemClicked(v, getPosition());
             }
         }
-    }
 
-    //PASSES THE VALUE TO THE MAIN ACTIVITY
-    public interface Clicklistener {
-        public void itemClicked(View view, int position);
     }
 }
