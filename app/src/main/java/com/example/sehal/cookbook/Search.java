@@ -9,39 +9,47 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.sehal.cookbook.tabs.SlidingTabLayout;
 import com.facebook.CallbackManager;
 import com.facebook.ProfileTracker;
 
+import com.blunderer.materialdesignlibrary.activities.Activity;
+import com.blunderer.materialdesignlibrary.handlers.ActionBarDefaultHandler;
+import com.blunderer.materialdesignlibrary.handlers.ActionBarHandler;
+import com.blunderer.materialdesignlibrary.handlers.ActionBarSearchHandler;
+import com.blunderer.materialdesignlibrary.listeners.OnSearchListener;
 
-public class Search extends ActionBarActivity implements Communicator {
+
+public class Search extends Activity implements Communicator {
 
     FragmentManager manager;
     ViewPager mPager;
     SlidingTabLayout mTabs;
     ProfileTracker mProfiletracker;
     String name;
+    public static String searchkeyword;
     CallbackManager callbackManager;
     public static String IDNO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        // setContentView(R.layout.activity_search);
 
         //TOOL BAR CODE
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //setSupportActionBar(toolbar);
+        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         //FRAGMENT HOME PAGE DISPLATY CODE
-        SearchHome searchHomePage = new SearchHome();
+      /*  SearchHome searchHomePage = new SearchHome();
         manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.fragmentpage, searchHomePage);
-        transaction.commit();
+        transaction.commit();*/
 
         //NAVIGATION DRAWER SETUP
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -59,26 +67,33 @@ public class Search extends ActionBarActivity implements Communicator {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-        return true;
+    protected int getContentView() {
+        // Return your layout resource.
+
+        return R.layout.activity_search;
     }
+
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    protected ActionBarHandler getActionBarHandler() {
+        return new ActionBarSearchHandler(this, new OnSearchListener() {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+            @Override
+            public void onSearched(String text) {
+                // Toast.makeText(Search.this, "SEARCHLISTERROR" + text, Toast.LENGTH_SHORT).show();
+                searchkeyword = text;
+                SearchHome searchHomePage = new SearchHome();
+                manager = getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.fragmentpage, searchHomePage);
+                transaction.commit();
+                //TODO: write your code here
+            }
 
-        return super.onOptionsItemSelected(item);
+        })
+                .enableAutoCompletion();
     }
+
 
     @Override
     public void respond(int pos, String data) {
@@ -91,7 +106,7 @@ public class Search extends ActionBarActivity implements Communicator {
 
         FragmentTransaction transaction = manager.beginTransaction();
 
-        IDNO=data.toString();
+        IDNO = data.toString();
         transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
         transaction.replace(R.id.fragmentpage, indRecipe);
         transaction.addToBackStack(null);

@@ -69,6 +69,7 @@ public class RLAapter extends RecyclerView.Adapter<RLAapter.RecipleListViewHolde
         RecipeInfo currentRecipeInfo = mRecipeList.get(position);
         //one or more fields of the RecipeInfo object may be null since they are fetched from the web
         holder.vDishName.setText(currentRecipeInfo.getTitle());
+        holder.vloading.setVisibility(View.VISIBLE);
         int audienceScore = currentRecipeInfo.getRating();
             holder.ratings.setRating(audienceScore / 20.0F);
             holder.ratings.setAlpha(1.0F);
@@ -84,13 +85,15 @@ public class RLAapter extends RecyclerView.Adapter<RLAapter.RecipleListViewHolde
             @Override
             public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
                 holder.vDishaImage.setImageBitmap(response.getBitmap());
-                holder.loading.setVisibility(View.GONE);
+                holder.vloading.setVisibility(View.GONE);
             }
 
             @Override
             public void onErrorResponse(VolleyError error) {
-
+               holder.vloading.setVisibility(View.GONE);
             }
+
+
         });
         //  }
     }
@@ -105,14 +108,14 @@ public class RLAapter extends RecyclerView.Adapter<RLAapter.RecipleListViewHolde
         ImageView vDishaImage;
         TextView vDishName;
         RatingBar ratings;
-        ProgressBar loading;
+        ProgressBar vloading;
 
         public RecipleListViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
             vDishName = (TextView) v.findViewById(R.id.dish_name);
             vDishaImage = (ImageView) v.findViewById(R.id.dish_image);
-            loading = (ProgressBar) v.findViewById(R.id.progress);
+            vloading = (ProgressBar) v.findViewById(R.id.progress);
             ratings = (RatingBar) v.findViewById(R.id.ratings);
 
         }

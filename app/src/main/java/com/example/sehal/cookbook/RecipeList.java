@@ -24,14 +24,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.bartoszlipinski.recyclerviewheader.RecyclerViewHeader;
+import com.facebook.Profile;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import me.drakeet.materialdialog.MaterialDialog;
@@ -53,20 +56,22 @@ public class RecipeList extends Fragment implements RLAapter.RLCLickListner {//i
     //public static final String URL_RECIPE = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json";
     public static final String URL_RECIPE = "http://food2fork.com/api/search";
     Communicator comm;
-
+    public static int page = 2;
     RatingBar ratings;
     FragmentManager manager;
     private ImageLoader imageLoader;
     private VolleySingleton volleySingleton;
+    public static String formattedDate;
     private RequestQueue requestQueue;
     private ArrayList<RecipeInfo> recipelists = new ArrayList<>();
     RLAapter rlAapter;
+    MaterialDialog mMaterialDialog;
 
 
     //DECALRING THE URL FOR THE API IN ONE STRING
     public static String getRequestUrl(int limit) {
         //return URL_BIG_OVEN + "&rpp=" + limit + "&apikey=" + MyApplication.API_KEY;   //BIGOVEn URL
-        return URL_RECIPE + "?key=" + MyApplication.API_KEY;          //ROTTEN TOMATOES
+        return URL_RECIPE + "?key=" + MyApplication.API_KEY + "&page=" + formattedDate;          //ROTTEN TOMATOES
     }
 
     public RecipeList() {
@@ -77,6 +82,9 @@ public class RecipeList extends Fragment implements RLAapter.RLCLickListner {//i
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd");
+        formattedDate = df.format(c.getTime());
         volleySingleton = VolleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
         sendjsonrequest();
@@ -93,8 +101,18 @@ public class RecipeList extends Fragment implements RLAapter.RLCLickListner {//i
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "RECIPELISTERROR" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                mMaterialDialog = new MaterialDialog(getActivity())
+                        .setTitle("NO INTERNET")
+                        .setMessage("Please check your network settings")
+                        .setNegativeButton("CLOSE", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mMaterialDialog.dismiss();
 
+                            }
+                        });
+                mMaterialDialog.show();
+                //Toast.makeText(getActivity(), "RECIPELISTERROR" + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -113,7 +131,7 @@ public class RecipeList extends Fragment implements RLAapter.RLCLickListner {//i
         //RECYCLER VIEW SETUP (RECIPE LIST) //TODO CHANGE THE VARIABLE NAME LATER
         RecyclerView rrecipelist = (RecyclerView) layout.findViewById(R.id.recipeList);
         rrecipelist.setHasFixedSize(true);
-        GridLayoutManager llm = new GridLayoutManager(getActivity(), 2);
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rrecipelist.setLayoutManager(llm);
         rlAapter = new RLAapter(getActivity());
@@ -148,7 +166,6 @@ public class RecipeList extends Fragment implements RLAapter.RLCLickListner {//i
                 e.printStackTrace();
             }
 
-
         }
         return listrecipe;
     }
@@ -164,9 +181,9 @@ public class RecipeList extends Fragment implements RLAapter.RLCLickListner {//i
     @Override
     public void itemClicked(View view, String Id) {
         comm.respond(99, Id);
-       // Log.d("indo",indo);
-         //      Toast.makeText(getActivity(), "RECIPELISTERROR" + position, Toast.LENGTH_SHORT).show();
-       // comm.respond(99,"sadsda");
+        // Log.d("indo",indo);
+        //      Toast.makeText(getActivity(), "RECIPELISTERROR" + position, Toast.LENGTH_SHORT).show();
+        // comm.respond(99,"sadsda");
         /*IndRecipe indRecipe = new IndRecipe();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -174,6 +191,11 @@ public class RecipeList extends Fragment implements RLAapter.RLCLickListner {//i
         transaction.addToBackStack(null);
         transaction.commit();*/
 
+    }
+
+    public void onResume() {
+        super.onResume();
+        sendjsonrequest();
     }
 
 

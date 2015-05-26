@@ -81,14 +81,14 @@ public class NavigationDrawer extends Fragment implements ClickListener {
             //TODO INSERT THE ARRAY DIRECTLY TO STRING XML FILE
             int icons[] = {R.drawable.home,
                     R.drawable.search,
-                    R.drawable.favourite,
+                //    R.drawable.favourite,
                     R.drawable.settings,
             };
 
             //TODO INSERT THE ARRAY DIRECTLY TO STRING XML FILE
             String navmenu[] = {"Main Menu",
                     "Search",
-                    "Favourite",
+                  //  "Favourite",
                     "Settings",
             };
 
@@ -152,16 +152,17 @@ public class NavigationDrawer extends Fragment implements ClickListener {
     //ITEM CLICK THIS IS PASSED TO MAIN ACTIVITY
     @Override
     public void itemClicked(View view, int position) {
+        //mDrawerLayout.closeDrawers();
         switch (position) {
             case 1:
                 mDrawerLayout.closeDrawers();
                 startActivity(new Intent(getActivity(), Search.class));
                 break;
-            case 2:
+            case 3:
                 mDrawerLayout.closeDrawers();
                 startActivity(new Intent(getActivity(), Favourite.class));
                 break;
-            case 3:
+            case 2:
                 mDrawerLayout.closeDrawers();
                 startActivity(new Intent(getActivity(), Settings.class));
                 break;

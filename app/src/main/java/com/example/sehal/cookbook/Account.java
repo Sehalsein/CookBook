@@ -37,6 +37,7 @@ public class Account extends Fragment {
 
     CallbackManager callbackManager;
     String UserName;
+    TextView mprofilename;
     AccessTokenTracker mTokentracker;
     ProfileTracker mProfiletracker;
     ImageView displaypicture;
@@ -55,8 +56,9 @@ public class Account extends Fragment {
                         .load(DISPLAY_PICTURE_URL)
                         .into(displaypicture);
                 UserName = profile.getName();
+                mprofilename.setText(profile.getName());
                 // UserName.setText("Welcome " + profile.getName());
-                Toast.makeText(getActivity(), "Welcome " + profile.getName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Welcome " + profile.getName(), Toast.LENGTH_SHORT).show();
 
             }
         }
@@ -96,6 +98,7 @@ public class Account extends Fragment {
                     Picasso.with(getActivity())
                             .load(DISPLAY_PICTURE_URL)
                             .into(displaypicture);
+                    mprofilename.setText(newprofile.getName());
                 }
             }
         };
@@ -112,6 +115,7 @@ public class Account extends Fragment {
 
         //CIRCLE DP
         displaypicture = (ImageView) layout.findViewById(R.id.displaypicture);
+        mprofilename=(TextView) layout.findViewById(R.id.displayname);
         // displaypicture.setImageResource(R.drawable.dp);
 
         CircleDP circularImageView = (CircleDP) layout.findViewById(R.id.displaypicture);
@@ -154,6 +158,7 @@ public class Account extends Fragment {
             Picasso.with(getActivity())
                     .load(DISPLAY_PICTURE_URL)
                     .into(displaypicture);
+            mprofilename.setText(profile.getName());
         }
     }
 

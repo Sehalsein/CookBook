@@ -3,59 +3,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundDark"
     android:orientation="vertical"
     tools:context="com.example.sehal.cookbook.Account">
 
     <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="#548965">
+        android:background="@drawable/image3" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
 
         <com.example.sehal.cookbook.CircleDP
             android:id="@+id/displaypicture"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="15dp"
             android:elevation="5dp"
-            android:paddingTop="25dp"
             android:scaleType="fitXY"
             android:src="@drawable/batmandp" />
 
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginRight="5dp" />
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:background="#303030">
-
-        <Switch
-            android:id="@+id/switch1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="right"
-            android:layout_marginTop="50dp"
-            android:textColor="@color/texticon"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="WOULD U LIKE TO RECIVE NOTIFICATION"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/displayname"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:textColor="@color/texticon"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_weight="1" />
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="10dp"/>
+
+        </LinearLayout>
 
 
-    </RelativeLayout>
+    </LinearLayout>
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="right"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="WOULD U LIKE TO RECIVE NOTIFICATION"
+        android:textColor="@color/texticon"
+        android:textStyle="bold" />
+
 
 </LinearLayout>

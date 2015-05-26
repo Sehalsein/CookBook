@@ -103,16 +103,24 @@ public class MainActivity extends ActionBarActivity implements Communicator {
         NavigationDrawer drawerFragment =
                 (NavigationDrawer) getSupportFragmentManager()
                         .findFragmentById(R.id.fragment_nav_drawer);
+        //drawerLayout.closeDrawer(0);
 
         drawerFragment.setup(drawerLayout, toolbar);
 
 
         //FRAGMENT HOME PAGE DISPLATY CODE
-        HomePage homePage = new HomePage();
+        RecipeList recipeList = new RecipeList();
+        manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        //transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+        transaction.replace(R.id.fragmentpage, recipeList);
+        //transaction.addToBackStack(null);
+        transaction.commit();
+        /*HomePage homePage = new HomePage();
         manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.fragmentpage, homePage);
-        transaction.commit();
+        transaction.commit();*/
 
 
         //INTIIALIZING PAGER AND TABS
@@ -139,19 +147,12 @@ public class MainActivity extends ActionBarActivity implements Communicator {
         Account account = new Account();
 
         FragmentTransaction transaction = manager.beginTransaction();
-        if (position == 99) {
-            IDNO=data.toString();
-            transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-            transaction.replace(R.id.fragmentpage, indRecipe);
-            transaction.addToBackStack(null);
-            transaction.commit();
+        IDNO = data.toString();
+        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+        transaction.replace(R.id.fragmentpage, indRecipe);
+        transaction.addToBackStack(null);
+        transaction.commit();
 
-        } else {
-            transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-            transaction.replace(R.id.fragmentpage, recipeList);
-            transaction.addToBackStack(null);
-            transaction.commit();
-       }
     }
 
     public void parsesetup(String loginusername) {

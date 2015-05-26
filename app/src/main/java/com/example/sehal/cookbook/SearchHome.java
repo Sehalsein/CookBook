@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import me.drakeet.materialdialog.MaterialDialog;
+
 import static com.example.sehal.cookbook.Keys.EndpointRecipe.*;
 
 
@@ -39,18 +42,20 @@ public class SearchHome extends Fragment implements SHAdapter.RLCLickListner {//
     Communicator comm;
     static String searchkey;
     RatingBar ratings;
+    SearchView searchview;
     FragmentManager manager;
     private ImageLoader imageLoader;
     private VolleySingleton volleySingleton;
     private RequestQueue requestQueue;
     private ArrayList<SHInfo> recipelists = new ArrayList<>();
     SHAdapter shAdapter;
+    MaterialDialog mMaterialDialog;
 
 
     //DECALRING THE URL FOR THE API IN ONE STRING
     public static String getRequestUrl(int limit) {
         //return URL_BIG_OVEN + "&rpp=" + limit + "&apikey=" + MyApplication.API_KEY;   //BIGOVEn URL
-        return URL_RECIPE + "?key=" + MyApplication.API_KEY+"&q="+searchkey;          //ROTTEN TOMATOES
+        return URL_RECIPE + "?key=" + MyApplication.API_KEY+"&q="+Search.searchkeyword;          //ROTTEN TOMATOES
     }
 
     public SearchHome() {
@@ -77,7 +82,18 @@ public class SearchHome extends Fragment implements SHAdapter.RLCLickListner {//
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "SEARCHLISTERROR" + error.getMessage(), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(), "SEARCHLISTERROR" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                mMaterialDialog = new MaterialDialog(getActivity())
+                        .setTitle("NO INTERNET")
+                        .setMessage("Please check your network settings")
+                        .setNegativeButton("CLOSE", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mMaterialDialog.dismiss();
+
+                            }
+                        });
+                mMaterialDialog.show();
 
             }
         });
@@ -105,6 +121,8 @@ public class SearchHome extends Fragment implements SHAdapter.RLCLickListner {//
         shAdapter.setClicklistener(this);
         rrecipelist.setAdapter(shAdapter);
 
+
+//        searchview= (SearchView) layout.findViewById(R.id.recipesearch);
         searchkey="oyster";
 
         return layout;

@@ -2,13 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.sehal.cookbook.About">
 
-    <!-- TODO: Update blank fragment layout -->
+    tools:context="com.example.sehal.cookbook.Splash">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/aboutus"
-        android:scaleType="fitXY" />
-
+        android:background="@drawable/splashscren"
+        android:scaleType="fitXY"
+        />
 </RelativeLayout>

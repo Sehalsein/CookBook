@@ -11,6 +11,7 @@
         <item name="colorPrimary">@color/primarycolor</item>
         <item name="colorPrimaryDark">@color/primarycolorDark</item>
         <item name="colorAccent">@color/accentColor</item>
+
     </style>
 
     <style name="CustomToolBar" parent="ThemeOverlay.AppCompat.Dark">
