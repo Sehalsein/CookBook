@@ -2,13 +2,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.sehal.cookbook.HomePage">
+    android:background="#d5000000"
+    tools:context="com.example.sehal.cookbook.fragments.HomePage">
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="@android:style/Widget.Holo.ProgressBar.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
 
     <!-- TODO: Update blank fragment layout -->
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recipeList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#d5000000" />
-
 </RelativeLayout>

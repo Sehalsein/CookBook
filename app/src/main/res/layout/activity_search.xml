@@ -22,7 +22,7 @@
 
         <fragment
             android:id="@+id/fragment_nav_drawer"
-            android:name="com.example.sehal.cookbook.NavigationDrawer"
+            android:name="com.example.sehal.cookbook.fragments.NavigationDrawer"
             android:layout_width="@dimen/nav_drawer_width"
             android:layout_height="match_parent"
             android:layout_gravity="start"

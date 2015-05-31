@@ -7,9 +7,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-
+import com.example.sehal.cookbook.fragments.FavouriteHome;
+import com.example.sehal.cookbook.fragments.NavigationDrawer;
+import com.example.sehal.cookbook.misc.Communicator;
 import com.example.sehal.cookbook.tabs.SlidingTabLayout;
 import com.facebook.CallbackManager;
 import com.facebook.ProfileTracker;
@@ -18,11 +18,6 @@ import com.facebook.ProfileTracker;
 public class Favourite extends ActionBarActivity implements Communicator {
 
     FragmentManager manager;
-    ViewPager mPager;
-    SlidingTabLayout mTabs;
-    ProfileTracker mProfiletracker;
-    String name;
-    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +40,8 @@ public class Favourite extends ActionBarActivity implements Communicator {
         drawerFragment.setup(drawerLayout, toolbar);
 
 
-        //FRAGMENT HOME PAGE DISPLATY
+        //FRAGMENT HOME PAGE DISPLAY
         FavouriteHome fav = new FavouriteHome();
-
         manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.fragmentfavpage, fav);

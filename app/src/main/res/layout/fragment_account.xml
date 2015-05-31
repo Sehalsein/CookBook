@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundDark"
     android:orientation="vertical"
-    tools:context="com.example.sehal.cookbook.Account">
+    tools:context="com.example.sehal.cookbook.fragments.Account">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageView
@@ -20,7 +20,7 @@
         android:orientation="horizontal">
 
 
-        <com.example.sehal.cookbook.CircleDP
+        <com.example.sehal.cookbook.misc.CircleDP
             android:id="@+id/displaypicture"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -59,7 +59,7 @@
     </LinearLayout>
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/notificationswitch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -68,7 +68,7 @@
         android:layout_marginTop="30dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="WOULD U LIKE TO RECIVE NOTIFICATION"
+        android:text="WOULD U LIKE TO RECEIVE NOTIFICATION"
         android:textColor="@color/texticon"
         android:textStyle="bold" />
 

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundDark"
     android:orientation="vertical"
-    tools:context="com.example.sehal.cookbook.Feedback">
+    tools:context="com.example.sehal.cookbook.fragments.Feedback">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageView
@@ -13,10 +13,12 @@
         android:background="@drawable/meatmain" />
 
     <RelativeLayout
+        android:id="@+id/feedback"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/settings_custom_row"
-        android:clickable="true">
+        android:clickable="true"
+        android:onClick="do">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -34,8 +36,8 @@
             android:gravity="center"
             android:paddingLeft="40dp"
             android:text="Send Us Feedback"
-            android:textStyle="bold"
-            android:textColor="@color/texticon" />
+            android:textColor="@color/texticon"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -58,10 +60,10 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textStyle="bold"
             android:paddingLeft="40dp"
             android:text="Rate Our App"
-            android:textColor="@color/texticon" />
+            android:textColor="@color/texticon"
+            android:textStyle="bold" />
     </RelativeLayout>
 
 </LinearLayout>

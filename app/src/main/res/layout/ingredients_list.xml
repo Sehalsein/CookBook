@@ -10,7 +10,7 @@
         style="@android:style/TextAppearance.Holo.Small"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:paddingLeft="25dp"
         android:text="dsadsa"
         android:textColor="@color/texticon" />

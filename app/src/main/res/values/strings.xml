@@ -17,4 +17,5 @@
     <string name="title_activity_favourite">Favourite</string>
     <string name="title_activity_search">Search</string>
     <string name="title_activity_splash">Splash</string>
+    <string name="title_activity_recipeday">Recipeday</string>
 </resources>

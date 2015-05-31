@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="20dp"
+    tools:context="com.example.sehal.cookbook.fragments.Openscource">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Title"
+        android:textColor="#ff000000"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/copyright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="CopyRight "
+        android:textColor="#28000000" />
+
+    <TextView
+        android:id="@+id/projecttitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Project"
+        android:textColor="#28000000" />
+
+    <TextView
+        android:id="@+id/projecturl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textColor="#ff000000"
+        android:text="ProjectURL" />
+
+    <TextView
+        android:id="@+id/licensetitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="License"
+        android:textColor="#28000000" />
+
+    <TextView
+        android:id="@+id/licenseurl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textColor="#ff000000"
+        android:text="LicenseURL" />
+
+</LinearLayout>

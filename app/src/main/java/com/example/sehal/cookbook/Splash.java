@@ -1,14 +1,25 @@
 package com.example.sehal.cookbook;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.example.sehal.cookbook.misc.AlarmReceiver;
+
+import java.util.Calendar;
 
 
 public class Splash extends ActionBarActivity {
+
+    private PendingIntent pendingIntent;
+    boolean myBoolean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +36,37 @@ public class Splash extends ActionBarActivity {
 
             }
         }, myTimer);
+
+        //TIMER FOR NOTIFICATION
+        Intent alarmIntent = new Intent(Splash.this, AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(Splash.this, 0, alarmIntent, 0);
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        int interval = 1000 * 60 * 60 * 24; //mins
+        Calendar calendar = Calendar.getInstance();
+        Calendar currentCal = Calendar.getInstance();
+
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 20);
+        calendar.set(Calendar.MINUTE, 00);
+
+        long intendedTime = calendar.getTimeInMillis();
+        long currentTime = currentCal.getTimeInMillis();
+
+        if (intendedTime > currentTime) {
+            manager.setRepeating(AlarmManager.RTC_WAKEUP, intendedTime, AlarmManager.INTERVAL_DAY, pendingIntent);
+        } else {
+            //set from next day
+            // you might consider using calendar.add() for adding one day to the current day
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            intendedTime = calendar.getTimeInMillis();
+            manager.setRepeating(AlarmManager.RTC, intendedTime, AlarmManager.INTERVAL_DAY, pendingIntent);
+        }
+      //  Toast.makeText(this, "SUCESES" + myBoolean, Toast.LENGTH_LONG).show();
+        if (myBoolean==true){
+            Toast.makeText(this, "SUCESES" + myBoolean, Toast.LENGTH_LONG).show();
+        }
+
     }
-
-
-
 
 
     @Override
@@ -51,5 +89,11 @@ public class Splash extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        myBoolean = savedInstanceState.getBoolean("NOTIFICATIONSWITCH");
     }
 }
