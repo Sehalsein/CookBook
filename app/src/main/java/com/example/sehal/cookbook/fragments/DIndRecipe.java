@@ -86,7 +86,7 @@ public class DIndRecipe extends Fragment {
         //NO OF TABS REQUIRED ITS CHANGEABLE
         @Override
         public int getCount() {
-            return 2;
+            return 1;
         }
     }
 

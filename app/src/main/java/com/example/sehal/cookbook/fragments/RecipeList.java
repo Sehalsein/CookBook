@@ -60,7 +60,7 @@ public class RecipeList extends Fragment implements RLAapter.RLCLickListner {//i
     ProgressBar loading;
     FragmentManager manager;
     private VolleySingleton volleySingleton;
-    public static String formattedDate;
+    public static int formattedDate;
     private RequestQueue requestQueue;
     private ArrayList<RecipeInfo> recipelists = new ArrayList<>();
     RLAapter rlAapter;
@@ -85,7 +85,7 @@ public class RecipeList extends Fragment implements RLAapter.RLCLickListner {//i
         super.onCreate(savedInstanceState);
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("dd");
-        formattedDate = df.format(c.getTime());
+        formattedDate = Integer.parseInt(df.format(c.getTime()));
         volleySingleton = VolleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
         sendjsonrequest();
@@ -140,6 +140,7 @@ public class RecipeList extends Fragment implements RLAapter.RLCLickListner {//i
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.recipe_list, container, false);
         loading = (ProgressBar) layout.findViewById(R.id.progress);
+        loading.setBackgroundColor(getActivity().getResources().getColor(R.color.texticon));
         ratings = (RatingBar) layout.findViewById(R.id.ratings);
         manager = getFragmentManager();
         loading.setVisibility(View.VISIBLE);
@@ -153,6 +154,8 @@ public class RecipeList extends Fragment implements RLAapter.RLCLickListner {//i
         rlAapter = new RLAapter(getActivity());
         rlAapter.setClicklistener(this);
         rrecipelist.setAdapter(rlAapter);
+
+
 
         return layout;
     }

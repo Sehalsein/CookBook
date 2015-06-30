@@ -25,6 +25,7 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.share.widget.LikeView;
 import com.squareup.picasso.Picasso;
 
 
@@ -119,10 +120,10 @@ public class Account extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     switchnotification = isChecked;
-                    Toast.makeText(getActivity(), "" + isChecked, Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getActivity(), "" + isChecked, Toast.LENGTH_LONG).show();
                 } else {
                     switchnotification = isChecked;
-                    Toast.makeText(getActivity(), "" + isChecked, Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(getActivity(), "" + isChecked, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -133,6 +134,9 @@ public class Account extends Fragment {
         mprofilename = (TextView) layout.findViewById(R.id.displayname);
 
         // displaypicture.setImageResource(R.drawable.dp);
+
+
+
 
         CircleDP circularImageView = (CircleDP) layout.findViewById(R.id.displaypicture);
         circularImageView.setBorderColor(getResources().getColor(R.color.dividercolor));

@@ -16,5 +16,5 @@
         android:layout_height="match_parent"
         android:background="@color/backgroundDark" />
 
-    >
+
 </LinearLayout>

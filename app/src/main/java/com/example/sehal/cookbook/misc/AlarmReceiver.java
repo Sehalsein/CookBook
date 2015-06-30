@@ -24,8 +24,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         this.context = context;
-        Toast.makeText(context, "I'COOKBOOK running", Toast.LENGTH_SHORT).show();
-         no.notification();
+        no.notification();
 
     }
 

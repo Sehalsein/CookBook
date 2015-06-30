@@ -17,7 +17,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.sehal.cookbook.MainActivity;
 import com.example.sehal.cookbook.R;
+import com.example.sehal.cookbook.Recipeday;
 import com.example.sehal.cookbook.Search;
 import com.example.sehal.cookbook.adapters.DIAdapter;
 import com.example.sehal.cookbook.infos.DIngredientsInfo;
@@ -93,7 +95,7 @@ public class DIngredients extends Fragment {
     public static String getRequestUrl(int limit) {
         //return URL_BIG_OVEN + "&rpp=" + limit + "&apikey=" + MyApplication.API_KEY;   //BIGOVEn URL
         //return URL_RECIPE + "?key=" + MyApplication.API_KEY;          //ROTTEN TOMATOES
-        return URL_RECIPE_IND + "?key=" + MyApplication.API_KEY + "&rId=6115d0";// + Search.IDNO;          //ROTTEN TOMATOES
+        return URL_RECIPE_IND + "?key=" + MyApplication.API_KEY + "&rId=";// + Recipeday.IDNO;// + Search.IDNO;          //ROTTEN TOMATOES
     }
 
 
@@ -102,7 +104,7 @@ public class DIngredients extends Fragment {
         super.onCreate(savedInstanceState);
         volleySingleton = VolleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
-        sendjsonrequest();
+
 
     }
 
@@ -133,10 +135,9 @@ public class DIngredients extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_ingredients, container, false);
-
+        sendjsonrequest();
         ratings = (RatingBar) layout.findViewById(R.id.ratings);
         manager = getFragmentManager();
-
         //RECYCLER VIEW SETUP (RECIPE LIST) //TODO CHANGE THE VARIABLE NAME LATER
         RecyclerView ringredients = (RecyclerView) layout.findViewById(R.id.indrecipeingriedints);
         ringredients.setHasFixedSize(true);
@@ -162,7 +163,7 @@ public class DIngredients extends Fragment {
                     DIngredientsInfo ingredinetsInfo = new DIngredientsInfo();
                     ingredinetsInfo.setingredinetsname(ing);
                     listrecipe.add(ingredinetsInfo);
-                   // L.t(getActivity(), ing.toString());
+                    // L.t(getActivity(), ing.toString());
                 }
 
             } catch (JSONException e) {

@@ -28,14 +28,18 @@ import com.example.sehal.cookbook.misc.Communicator;
 import com.example.sehal.cookbook.misc.MyApplication;
 import com.example.sehal.cookbook.misc.VolleySingleton;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static com.example.sehal.cookbook.misc.Keys.EndpointRecipe.KEY_IMAGE_URL;
 import static com.example.sehal.cookbook.misc.Keys.EndpointRecipe.KEY_RECEPE_ID;
 import static com.example.sehal.cookbook.misc.Keys.EndpointRecipe.KEY_RECIPE;
+import static com.example.sehal.cookbook.misc.Keys.EndpointRecipe.KEY_RECIPES;
 import static com.example.sehal.cookbook.misc.Keys.EndpointRecipe.KEY_SOCIAL_RANK;
 import static com.example.sehal.cookbook.misc.Keys.EndpointRecipe.KEY_SOURCE_URL;
 import static com.example.sehal.cookbook.misc.Keys.EndpointRecipe.KEY_TITLE;
@@ -52,11 +56,16 @@ public class DRecipe extends Fragment {
     private DrawerLayout mDrawerLayout;
     public static final String URL_RECIPE = "http://food2fork.com/api/search";
     public static final String URL_RECIPE_IND = "http://food2fork.com/api/get";
+    public static int formattedMonth;
+    public static int formattedDate;
+    public static String id;
+
     Communicator comm;
     ImageView dishimage;
     RatingBar ratingsbar;
     TextView dishname;
     WebView wb;
+
     FragmentManager manager;
     private ImageLoader imageLoader;
     private VolleySingleton volleySingleton;
@@ -84,16 +93,24 @@ public class DRecipe extends Fragment {
     public static String getRequestUrl(int limit) {
         //return URL_BIG_OVEN + "&rpp=" + limit + "&apikey=" + MyApplication.API_KEY;   //BIGOVEn URL
         //return URL_RECIPE + "?key=" + MyApplication.API_KEY;          //ROTTEN TOMATOES
-        return URL_RECIPE_IND + "?key=" + MyApplication.API_KEY + "&rId=6115d0";//+ Search.IDNO;          //ROTTEN TOMATOES
+        return URL_RECIPE + "?key=" + MyApplication.API_KEY + "&page=" + formattedMonth;//+ Search.IDNO;          //ROTTEN TOMATOES
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat mf = new SimpleDateFormat("MM");
+        SimpleDateFormat df = new SimpleDateFormat("dd");
+        formattedMonth = Integer.parseInt(mf.format(c.getTime()));
+        formattedMonth = formattedMonth + 30;
+        formattedDate = Integer.parseInt(df.format(c.getTime()));
+        //Toast.makeText(getActivity(), "PAGE" + formattedMonth, Toast.LENGTH_SHORT).show();
         volleySingleton = VolleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
         mImageLoader = volleySingleton.getImageLoader();
         sendjsonrequest();
+
     }
 
     public void sendjsonrequest() {
@@ -138,26 +155,29 @@ public class DRecipe extends Fragment {
         if (response != null && response.length() > 0) {
             try {
                 StringBuilder data = new StringBuilder();
-                IndRecipeInfo indRecipeInfo = new IndRecipeInfo();
-                JSONObject recipe = response.getJSONObject(KEY_RECIPE);
-                String id = recipe.getString(KEY_RECEPE_ID);
+                JSONArray arrayrecipes = response.getJSONArray(KEY_RECIPES);
+                if (formattedDate >= 30) {
+                    formattedDate = 0;
+                }
+                JSONObject recipe = arrayrecipes.getJSONObject(formattedDate);
+                id = recipe.getString(KEY_RECEPE_ID);
                 String title = recipe.getString(KEY_TITLE);
                 int ratings = recipe.getInt(KEY_SOCIAL_RANK);
                 String dirwebpage = recipe.getString(KEY_SOURCE_URL);
                 wb.loadUrl(dirwebpage);
                 String image = null;
                 image = recipe.getString(KEY_IMAGE_URL);
+                //Toast.makeText(getActivity(), "PAGE NID" + id, Toast.LENGTH_SHORT).show();
+                IndRecipeInfo indRecipeInfo = new IndRecipeInfo();
                 indRecipeInfo.setId(id);
                 indRecipeInfo.setTitle(title);
-
                 indRecipeInfo.setRating(ratings);
                 indRecipeInfo.setUrlThumbnail(image);
-
+                comm.respond(99, id);
                 dishname.setText(title);
                 ratingsbar.setRating(ratings / 20.0F);
                 ratingsbar.setAlpha(1.0F);
                 listrecipe.add(indRecipeInfo);
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -166,4 +186,11 @@ public class DRecipe extends Fragment {
         }
         return listrecipe;
     }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        comm = (Communicator) getActivity();
+        super.onActivityCreated(savedInstanceState);
+    }
+
 }
