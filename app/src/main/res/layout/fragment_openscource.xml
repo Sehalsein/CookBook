@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#FFF"
     android:orientation="vertical"
-    tools:context="com.example.sehal.cookbook.fragments.Openscource">
+    tools:context="com.seindev.sehal.cookbook.fragments.Openscource">
 
     <RelativeLayout
         android:layout_width="match_parent"

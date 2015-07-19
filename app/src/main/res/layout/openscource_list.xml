@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:paddingTop="10dp"
     android:paddingBottom="20dp"
-    tools:context="com.example.sehal.cookbook.fragments.Openscource">
+    tools:context="com.seindev.sehal.cookbook.fragments.Openscource">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

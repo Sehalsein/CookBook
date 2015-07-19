@@ -36,7 +36,7 @@
 
             <RatingBar
                 android:id="@+id/ratings"
-                style="@android:style/Widget.Holo.RatingBar.Small"
+                style="@android:style/Widget.Holo.Light.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"

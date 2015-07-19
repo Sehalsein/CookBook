@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundDark"
     android:orientation="vertical"
-    tools:context="com.example.sehal.cookbook.fragments.Feedback">
+    tools:context="com.seindev.sehal.cookbook.fragments.Feedback">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageView

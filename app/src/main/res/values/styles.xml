@@ -17,7 +17,7 @@
     <style name="CustomToolBar" parent="ThemeOverlay.AppCompat.Dark">
 
         <item name="android:textColor">#FFF</item>
-        <item name="android:textColorSecondary">#000</item>
+        <item name="android:textColorSecondary">#FFF</item>
     </style>
 
 </resources>

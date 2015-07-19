@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.sehal.cookbook.favourite">
+    tools:context="com.seindev.sehal.cookbook.favourite">
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView

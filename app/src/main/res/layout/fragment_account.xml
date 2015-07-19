@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundDark"
     android:orientation="vertical"
-    tools:context="com.example.sehal.cookbook.fragments.Account">
+    tools:context="com.seindev.sehal.cookbook.fragments.Account">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageView
@@ -20,15 +20,14 @@
         android:orientation="horizontal">
 
 
-        <com.example.sehal.cookbook.misc.CircleDP
+        <com.seindev.sehal.cookbook.misc.CircleDP
             android:id="@+id/displaypicture"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginLeft="16dp"
-            android:elevation="5dp"
+            android:background="@color/backgroundDark"
             android:scaleType="fitXY"
-            android:background="#00000000"
-            android:src="@drawable/batmandp" />
+            android:src="@drawable/plain1" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,18 +40,18 @@
                 android:id="@+id/displayname"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:textStyle="bold"
-                android:textSize="30dp"
-                android:textColor="@color/texticon"
+                android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_weight="1" />
+                android:textColor="@color/texticon"
+                android:textSize="30dp"
+                android:textStyle="bold" />
 
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/login_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="10dp" />
 
         </LinearLayout>
 
@@ -67,6 +66,7 @@
         android:layout_alignParentRight="true"
         android:layout_gravity="right"
         android:layout_marginTop="30dp"
+        android:checked="true"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="WOULD U LIKE TO RECEIVE NOTIFICATION"

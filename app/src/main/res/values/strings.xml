@@ -18,4 +18,11 @@
     <string name="title_activity_search">Search</string>
     <string name="title_activity_splash">Splash</string>
     <string name="title_activity_recipeday">Recipeday</string>
+
+
+    <string name="banner_main">ca-app-pub-2428915553618861/7774521632</string>
+    <string name="banner_fav">ca-app-pub-2428915553618861/9251254838</string>
+    <string name="banner_recipe_day">ca-app-pub-2428915553618861/1727988037</string>
+    <string name="banner_settings">ca-app-pub-2428915553618861/3204721230</string>
+    <string name="banner_search">ca-app-pub-2428915553618861/7495320030</string>
 </resources>

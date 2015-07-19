@@ -3,29 +3,50 @@
     android:id="@+id/aboutus"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.sehal.cookbook.fragments.About">
+    android:background="@drawable/aboutbg"
+    tools:context="com.seindev.sehal.cookbook.fragments.About">
 
     <!-- TODO: Update blank fragment layout -->
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/aboutus"
-        android:scaleType="fitXY" />
-
     <LinearLayout
         android:id="@+id/infoclick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="15dp"
         android:elevation="100dp">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="16dp"
             android:src="@drawable/info4" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/About"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/infoclick"
+        android:layout_marginLeft="43dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="80dp"
+        android:text="ABOUT US"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="50dp" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/About"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/About"
+        android:layout_below="@+id/About"
+        android:layout_marginTop="50dp"
+        android:text="des"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
